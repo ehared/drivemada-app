@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {IonicModule} from '@ionic/angular';
 import {RouterModule} from '@angular/router';
-import {LoginComponent} from './login.component';
+import {RegistrationComponent} from './registration.component';
 
 @NgModule({
     imports: [
@@ -13,11 +13,11 @@ import {LoginComponent} from './login.component';
         RouterModule.forChild([
             {
                 path: '',
-                component: LoginComponent
+                component: RegistrationComponent
             }
         ])
     ],
-    declarations: [LoginComponent]
+    declarations: [RegistrationComponent]
 })
-export class LoginComponentModule {
+export class RegistrationComponentModule {
 }
