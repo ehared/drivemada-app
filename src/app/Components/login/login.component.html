@@ -1,3 +1,27 @@
-<p>
-  login works!
-</p>
+<ion-content>
+  <div class = "form-group">
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-input [(ngModel)]= "driver.email" name = "email" #email= "ngModel"
+        required placeholder = "Email"
+        id = "email" type = "email"
+      >
+      </ion-input>
+    </ion-item>
+    <div class ="alert alert-danger" *ngIf="email.touched && !email.valid">
+      <div *ngIf = "email.errors.required">Email is required</div>
+    </div>
+  </div>
+  <div class = "form-group">
+    <ion-item>
+      <ion-label>Password</ion-label>
+      <ion-input [(ngModel)]= "driver.password" name = "password" #password= "ngModel"
+      required placeholder = "Password"
+      id = "password" type = "password"
+      ></ion-input>
+    </ion-item>
+    <div class ="alert alert-danger" *ngIf="password.touched && !password.valid">
+      <div *ngIf = "password.errors.required">Password is required</div>
+    </div>
+  </div>
+</ion-content>
