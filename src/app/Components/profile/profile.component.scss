@@ -1,0 +1,29 @@
+.container {
+    width: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  
+  ion-img {
+    /* this is a override of the shared launch css */
+    /* we have decreased the margin size to give more room for data entry */
+    margin-top: 5% !important;
+  }
+  
+  .circle {
+    display: inline-block;
+    background-color: #dadbdd;
+    border-radius: 75%;
+    width: 100px;
+    height: 100px;
+  }
+  
+  .header {
+    background-color: #ec6d5f !important;
+    text-align: center;
+    display: block;
+    width: 100%;
+  }
+  
+  
+  
