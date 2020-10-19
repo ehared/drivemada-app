@@ -1,27 +1,36 @@
 <ion-content>
-  <div class = "form-group">
+  <form #loginform="ngForm">
+
+  <div class="mb-5 ng-star-inserted">
+    <h6 class="h3">Login</h6>
+  </div>
+  <div class="form-group">
     <ion-item>
       <ion-label>Email</ion-label>
-      <ion-input [(ngModel)]= "driver.email" name = "email" #email= "ngModel"
-        required placeholder = "Email"
-        id = "email" type = "email"
-      >
+      <ion-input [(ngModel)]="driver.email" name="email" #email="ngModel" required placeholder="Email" id="email"
+        type="email">
       </ion-input>
     </ion-item>
-    <div class ="alert alert-danger" *ngIf="email.touched && !email.valid">
-      <div *ngIf = "email.errors.required">Email is required</div>
+    <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
+      <div *ngIf="email.errors.required">Email is required</div>
     </div>
   </div>
-  <div class = "form-group">
+  <div class="form-group">
     <ion-item>
       <ion-label>Password</ion-label>
-      <ion-input [(ngModel)]= "driver.password" name = "password" #password= "ngModel"
-      required placeholder = "Password"
-      id = "password" type = "password"
-      ></ion-input>
+      <ion-input [(ngModel)]="driver.password" name="password" #password="ngModel" required placeholder="Password"
+        id="password" type="password"></ion-input>
     </ion-item>
-    <div class ="alert alert-danger" *ngIf="password.touched && !password.valid">
-      <div *ngIf = "password.errors.required">Password is required</div>
+    <div class="alert alert-danger" *ngIf="password.touched && !password.valid">
+      <div *ngIf="password.errors.required">Password is required</div>
     </div>
   </div>
+
+  <div class="mt-4">
+    <button class="button button-large" type="submit" [disabled]="!loginform.form.valid" (click)="this.router.navigateByUrl('welcome')">
+      <span class="btn-inner--text">Login</span>
+      <span class="btn-inner--icon"><i class="fas fa-long-arrow-alt-right"></i></span></button>
+  </div>
+</form>
+
 </ion-content>

@@ -18,6 +18,14 @@ const routes: Routes = [
 {
   path: 'login',
   loadChildren: 'src/app/Components/login/login.module#LoginComponentModule'
+},
+{
+  path: 'settings',
+  loadChildren: 'src/app/Components/settings/settings.module#SettingsComponentModule'
+},
+{
+  path: 'editAcct',
+  loadChildren: 'src/app/Components/edit-acct/edit-acct.module#EditAcctComponentModule'
 }
 ];
 

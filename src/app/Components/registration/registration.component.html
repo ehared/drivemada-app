@@ -1,127 +1,136 @@
-<script>
 
-</script>
 <ion-header>
   <ion-toolbar>
     <ion-title>Sign Up</ion-title>
+    <ion-icon (click)="goBacktoLogin()"name="arrow-back-outline" slot="start"></ion-icon>
   </ion-toolbar>
 </ion-header>
 <ion-content>
 
   <form #registerForm="ngForm">
-    <div class="form-group">
-      <ion-input [(ngModel)]="driver.firstName" name="firstName" #firstName="ngModel" type="text" required
-        placeholder="First name"></ion-input>
-      <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
-        <div *ngIf="firstName.errors.required">First name is required</div>
+    <ion-list lines="none">
+      
+      <div class="form-group">
+        <ion-item class="input-circle">
+          <ion-label ></ion-label>
+          <ion-input [(ngModel)]="driver.firstName" name="firstName" #firstName="ngModel" type="text" required
+            placeholder="First name"></ion-input>
+        </ion-item>
+        <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
+          <div class ="errorMsg" *ngIf="firstName.errors.required">First name is required</div>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-
-      <ion-input [(ngModel)]="driver.lastName" name="lastName" #lastName="ngModel" type="text" required
-        placeholder="Last name"></ion-input>
-
-      <div class="alert alert-danger" *ngIf="lastName.touched && !lastName.valid">
-        <div *ngIf="lastName.errors.required">Last name is required</div>
+      <div class="form-group">
+        <ion-item class="input-circle">
+          <ion-label ></ion-label>
+          <ion-input [(ngModel)]="driver.lastName" name="lastName" #lastName="ngModel" type="text" required
+            placeholder="Last name"></ion-input>
+        </ion-item>
+        <div class="alert alert-danger" *ngIf="lastName.touched && !lastName.valid">
+          <div class ="errorMsg" *ngIf="lastName.errors.required">Last name is required</div>
+        </div>
       </div>
-    </div>
 
-
-    <div class="form-group">
-      <ion-item>
-        <ion-label>Email</ion-label>
-        <ion-input [(ngModel)]="driver.email" name="email" #email="ngModel" required placeholder="Email" id="email"
-          type="email" pattern="[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$">
-        </ion-input>
-      </ion-item>
-      <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
-        <div *ngIf="email.errors.required">Email is required.</div>
-        <div *ngIf="email.errors.pattern">Invalid email format.</div>
+      <div class="form-group">
+        <ion-item class="input-circle">
+          <ion-label></ion-label>
+          <ion-input [(ngModel)]="driver.email" name="email" #email="ngModel" required placeholder="Email" id="email"
+            type="email" pattern="[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$">
+          </ion-input>
+        </ion-item>
+        <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
+          <div class ="errorMsg" *ngIf="email.errors.required">Email is required.</div>
+          <div class ="errorMsg" *ngIf="email.errors.pattern">Invalid email format.</div>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <ion-item>
-        <ion-label>Password</ion-label>
-        <ion-input [(ngModel)]="driver.password" name="password" #password="ngModel" required placeholder="Password"
-          id="password" type="password" minlength="8" maxlength="20"
-          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&]).{8,20}">
-        </ion-input>
-      </ion-item>
-      <div class="alert alert-danger" *ngIf="password.touched && !password.valid">
-        <div *ngIf="password.errors.required">Password is required</div>
-        <div *ngIf="password.errors.pattern">Must contain an uppercase letter, a number, a special character, and be
-          between 8-20 characters</div>
+      <div class="form-group">
+        <ion-item class="input-circle">
+          <ion-label></ion-label>
+          <ion-input [(ngModel)]="driver.password" name="password" #password="ngModel" required placeholder="Password"
+            id="password" type="password" minlength="8" maxlength="20"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&]).{8,20}">
+          </ion-input>
+        </ion-item>
+        <div class="alert alert-danger" *ngIf="password.touched && !password.valid">
+          <div class ="errorMsg" *ngIf="password.errors.required">Password is required</div>
+          <div class ="errorMsg" *ngIf="password.errors.pattern">Must contain an uppercase letter, a number, a special character, and be
+            between 8-20 characters</div>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <ion-item>
-        <ion-label>Phone Number</ion-label>
-        <ion-input [(ngModel)]="driver.phoneNumber" name="phoneNum" #phoneNum="ngModel" required
-          placeholder="Phone Number" id="phoneNum"></ion-input>
-      </ion-item>
-      <div class="alert alert-danger" *ngIf="phoneNum.touched && !phoneNum.valid">
-        <div *ngIf="phoneNum.errors.required">Phone number is required</div>
+      <div class="form-group">
+        <ion-item class="input-circle">
+          <ion-label></ion-label>
+          <ion-input [(ngModel)]="driver.phoneNumber" name="phoneNum" #phoneNum="ngModel" required
+            placeholder="Phone Number" id="phoneNum"></ion-input>
+        </ion-item>
+        <div class="alert alert-danger" *ngIf="phoneNum.touched && !phoneNum.valid">
+          <div class ="errorMsg" *ngIf="phoneNum.errors.required">Phone number is required</div>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <ion-label>Make</ion-label>
-      <ion-item>
-        <ion-select [(ngModel)]="driver.carMake" name="carMake" #carMake="ngModel" id="carMake" required
-          placeholder="Select Make">
-          <ion-select-option *ngFor="let a of carMakes" [value]="a.name">{{a.name}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <div class="alert alert-danger" *ngIf="carMake.touched && !carMake.valid">
-        <div *ngIf="carMake.errors.required">Car make is required.</div>
+      <div class="form-group">
+
+        <ion-item class="input-circle">
+          <ion-label>Make</ion-label>
+          <ion-select [(ngModel)]="driver.carMake" name="carMake" #carMake="ngModel" id="carMake" required
+            placeholder="Select Make">
+            <ion-select-option *ngFor="let a of carMakes" [value]="a.name">{{a.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div class="alert alert-danger" *ngIf="carMake.touched && !carMake.valid">
+          <div class ="errorMsg" *ngIf="carMake.errors.required">Car make is required.</div>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <ion-item>
-        <ion-label>Model</ion-label>
-        <ion-input [(ngModel)]="driver.carModel" name="model" #model="ngModel" required placeholder="Car Model"
-          id="model" type="text"></ion-input>
-      </ion-item>
-      <div class="alert alert-danger" *ngIf="model.touched && !model.valid">
-        <div *ngIf="model.errors.required">Model is required.</div>
+      <div class="form-group">
+        <ion-item class="input-circle">
+          <ion-label></ion-label>
+          <ion-input [(ngModel)]="driver.carModel" name="model" #model="ngModel" required placeholder="Car Model"
+            id="model" type="text"></ion-input>
+        </ion-item>
+        <div class="alert alert-danger" *ngIf="model.touched && !model.valid">
+          <div class ="errorMsg" *ngIf="model.errors.required">Model is required.</div>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <ion-item>
-        <ion-label>Color</ion-label>
-        <ion-input [(ngModel)]="driver.carColor" name="carColor" #carColor="ngModel" required placeholder="Car Colour">
-        </ion-input>
-      </ion-item>
-      <div class="alert alert-danger" *ngIf="carColor.touched && !carColor.valid">
-        <div *ngIf="carColor.errors.required">Car colour is required.</div>
+      <div class="form-group">
+        <ion-item class="input-circle">
+          <ion-label></ion-label>
+          <ion-input [(ngModel)]="driver.carColor" name="carColor" #carColor="ngModel" required
+            placeholder="Car Colour">
+          </ion-input>
+        </ion-item>
+        <div class="alert alert-danger" *ngIf="carColor.touched && !carColor.valid">
+          <div class ="errorMsg" *ngIf="carColor.errors.required">Car colour is required.</div>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <ion-item>
-        <ion-label>License Plate</ion-label>
-        <ion-input [(ngModel)]="driver.licensePlate" name="licensePlate" #licensePlate="ngModel" required
-          placeholder="License Plate" id="licensePlate">
-        </ion-input>
-      </ion-item>
-      <div class="alert alert-danger" *ngIf="licensePlate.touched && !licensePlate.valid">
-        <div *ngIf="licensePlate.errors.required">License plate is required</div>
+      <div class="form-group">
+        <ion-item class="input-circle">
+          <ion-label></ion-label>
+          <ion-input [(ngModel)]="driver.carPlate" name="carPlate" #carPlate="ngModel" required
+            placeholder="License Plate" id="carPlate">
+          </ion-input>
+        </ion-item>
+        <div class="alert alert-danger" *ngIf="carPlate.touched && !carPlate.valid">
+          <div class ="errorMsg" m *ngIf="carPlate.errors.required">License plate is required</div>
+        </div>
       </div>
-    </div>
 
 
-    <div>
-      <ion-button expand="block" fill="outline" [disabled]="!registerForm.form.valid" (click)="signUp(registerForm)">Register</ion-button>
-    </div>
+      <div>
+        <ion-button expand="block" fill="outline" [disabled]="!registerForm.form.valid" (click)="signUp(registerForm)">
+          Register</ion-button>
+      </div>
 
-    <div>
-      <ion-button expand="block" fill="outline"(click)="goBacktoLogin()">Cancel</ion-button>
-    </div>
+      <div>
+        <ion-button expand="block" fill="outline" (click)="goBacktoLogin()">Cancel</ion-button>
+      </div>
+    </ion-list>
+
   </form>
 
 </ion-content>

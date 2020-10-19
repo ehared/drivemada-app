@@ -3,23 +3,21 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {IonicModule} from '@ionic/angular';
 import {RouterModule} from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-import {RegistrationComponent} from './registration.component';
+import {EditAcctComponent} from './edit-acct.component';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
-        HttpClientModule,
         RouterModule.forChild([
             {
                 path: '',
-                component: RegistrationComponent
+                component: EditAcctComponent
             }
         ])
     ],
-    declarations: [RegistrationComponent]
+    declarations: [EditAcctComponent]
 })
-export class RegistrationComponentModule {
+export class EditAcctComponentModule {
 }
