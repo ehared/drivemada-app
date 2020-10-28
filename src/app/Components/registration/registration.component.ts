@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import {NgModule} from '@angular/core'
 
 @Component({
@@ -18,7 +19,7 @@ export class RegistrationComponent {
     carMake: string,
     carModel: string,
     carColor: string,
-    licensePlate: string,
+    carPlate: string,
     isAvailable: boolean,
   } = {
     firstName: '',
@@ -29,16 +30,24 @@ export class RegistrationComponent {
     carMake: '',
     carModel: '',
     carColor: '',
-    licensePlate: '',
+    carPlate: '',
     isAvailable: false,
   };
 
   carMakes: any [] = [{name:'Honda'}, {name:'Kia'}, {name:'Toyota'}, {name:'Hyundai'}, {name:'Chevrolet'},{name:'BMW'},{name:'Acura'}];
 
-  constructor(public router: Router) {}
+  constructor(public router: Router,
+    private http: HttpClient) {}
   
-  signUp() {
-    console.log("We have made a driver!!!!");
+  signUp(form: any) {
+   /*
+      this.http.post('https://localhost:44397/api/registration', this.driver).subscribe((res) => {
+      console.log(res)
+      this.router.navigateByUrl('welcome');
+    });
+   */
+  this.router.navigateByUrl('welcome');
+    
   }
   goBacktoLogin(){
     this.router.navigateByUrl('welcome');
