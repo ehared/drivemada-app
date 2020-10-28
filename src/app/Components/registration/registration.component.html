@@ -1,7 +1,7 @@
 
 <ion-header>
   <ion-toolbar>
-    <ion-title>Sign Up</ion-title>
+    <ion-title>Create Account</ion-title>
     <ion-icon (click)="goBacktoLogin()"name="arrow-back-outline" slot="start"></ion-icon>
   </ion-toolbar>
 </ion-header>
@@ -11,9 +11,9 @@
     <ion-list lines="none">
       
       <div class="form-group">
-        <ion-item class="input-circle">
-          <ion-label ></ion-label>
-          <ion-input [(ngModel)]="driver.firstName" name="firstName" #firstName="ngModel" type="text" required
+        <ion-item >
+          <ion-label></ion-label>>
+          <ion-input class="input-circle"[(ngModel)]="driver.firstName" name="firstName" #firstName="ngModel" type="text" required
             placeholder="First name"></ion-input>
         </ion-item>
         <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">

@@ -40,10 +40,13 @@ export class RegistrationComponent {
     private http: HttpClient) {}
   
   signUp(form: any) {
-    this.http.post('https://localhost:44397/api/registration', this.driver).subscribe((res) => {
+   /*
+      this.http.post('https://localhost:44397/api/registration', this.driver).subscribe((res) => {
       console.log(res)
       this.router.navigateByUrl('welcome');
     });
+   */
+  this.router.navigateByUrl('welcome');
     
   }
   goBacktoLogin(){
