@@ -1,0 +1,70 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Welcome</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-slides pager="true" [options]="slideOpts" >
+    <ion-slide>
+      <img src="/assets/img/demo_welcome_logo.png" alt="1">
+    </ion-slide>
+    <ion-slide>
+      <img src="/assets/img/caretake.jpg" alt="2">
+    </ion-slide>
+  </ion-slides>
+  <div style="text-align: center;">
+    <h2>Thanks for your career in Drivemada</h2>
+  </div>
+  <div>
+    <ion-list>
+      <h5 style="margin-left:2%;">Why drive with us?</h5>
+      <img src="/assets/img/drive.jpg" >
+      <ion-item>
+        <ion-icon name="calendar"></ion-icon>
+        <ion-label>Set your own hours</ion-label>
+      </ion-item>
+      <h6 style="margin-left:2%;" >You decide when and how often you drive</h6>
+      <ion-item>
+        <ion-icon name="cash"></ion-icon>
+        <ion-label>Get paid fast</ion-label>
+      </ion-item>
+      <h6 style="margin-left:2%;" >Choose how and when you want to cash out.</h6>
+      <ion-item>
+        <ion-icon name="people"></ion-icon>
+        <ion-label>Get support at every turn</ion-label>
+      </ion-item>
+      <h6 style="margin-left:2%;" >If you have questions, you can reach us anytime.</h6>
+    </ion-list>
+</div>  
+  <div style="text-align: center;background-color:darkgrey;" >
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-icon name="newspaper-outline"></ion-icon>
+          <h6>Latest deals</h6>
+          <h6>our latest deals</h6>
+        </ion-col>
+        <ion-col>
+          <ion-icon name="people"></ion-icon>
+          <h6>About us</h6>
+          <h6>Find out who we are</h6>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill = "outline" class = "signUp" color="dark" [routerLink]="['/register']">Sign up</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button fill = "outline" class = "login" color="dark" [routerLink]="['/login']">Login</ion-button>
+    </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

@@ -1,23 +1,20 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
-import {IonicModule} from '@ionic/angular';
-import {RouterModule} from '@angular/router';
-import {SettingsComponent} from './settings.component';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+import { IonicModule } from '@ionic/angular';
+
+import { SettingsPageRoutingModule } from './settings-routing.module';
+
+import { SettingsPage } from './settings.page';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        RouterModule.forChild([
-            {
-                path: '',
-                component: SettingsComponent
-            }
-        ])
-    ],
-    declarations: [SettingsComponent]
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    SettingsPageRoutingModule
+  ],
+  declarations: [SettingsPage]
 })
-export class SettingsComponentModule {
-}
+export class SettingsPageModule {}

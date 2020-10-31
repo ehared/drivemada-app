@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,37 +13,41 @@ export class AppComponent implements OnInit {
   public selectedIndex = 0;
   public appPages = [
     {
+      title: 'Welcome',
+      url: '/welcome',
+      icon: 'star'
+    },
+    {
       title: 'Drive',
       url: '/drive',
       icon: 'car-sport'
     },
     {
-      title: 'Inbox',
-      url: '/inbox',
-      icon: 'mail'
+      title: 'Profile',
+      url: '/profile',
+      icon: 'person'
     },
     {
       title: 'Account',
       url: '/account',
-      icon: 'person'
-    },
-    {
-      title: 'Payments',
-      url: '/payments',
       icon: 'card'
     },
     {
       title: 'Settings',
       url: '/settings',
       icon: 'settings'
+    },
+    {
+      title: 'Exit',
+      url: '/exit',
+      icon: 'exit'
     }
   ];
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
-    private router: Router,
+    private statusBar: StatusBar
   ) {
     this.initializeApp();
   }
@@ -57,11 +60,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-  /*const path = window.location.pathname.split('folder/')[1];
+    const path = window.location.pathname.split('folder/')[1];
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
-    }*/
-   
+    }
   }
-  
 }

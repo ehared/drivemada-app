@@ -3,7 +3,6 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {IonicModule} from '@ionic/angular';
 import {RouterModule} from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
 import {RegistrationComponent} from './registration.component';
 
 @NgModule({
@@ -11,7 +10,6 @@ import {RegistrationComponent} from './registration.component';
         CommonModule,
         FormsModule,
         IonicModule,
-        HttpClientModule,
         RouterModule.forChild([
             {
                 path: '',

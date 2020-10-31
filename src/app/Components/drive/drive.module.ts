@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { WelcomePageRoutingModule } from './welcome-routing.module';
+import { DrivePageRoutingModule } from './drive-routing.module';
 
-import { WelcomePage } from './welcome.page';
+import { DrivePage } from './drive.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    WelcomePageRoutingModule
+    DrivePageRoutingModule
   ],
-  declarations: [WelcomePage]
+  declarations: [DrivePage]
 })
-export class WelcomePageModule {}
+export class DrivePageModule {}
