@@ -1,41 +1,73 @@
-<ion-toolbar>
-  <ion-header>
-    <ion-title>Login</ion-title>
-  </ion-header>
-</ion-toolbar>
-
 <ion-content>
-  <form #loginform="ngForm">
+  <div class="container h-100vh d-flex align-items-center">
+    <div class="col">
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5 col-xl-4">
+          <div>
+            <div class="mb-5 text-center">
+              <h6 class="h3">Login</h6>
+              <p class="text-muted mb-0">Sign in to your account to continue.</p>
+            </div>
+            <span class="clearfix"></span>
+            <form #loginForm="ngForm">
+              <div class="form-group">
+                <label class="form-control-label">Email address</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <ion-icon name="person-outline"></ion-icon>
+                    </span>
+                  </div>
+                  <input type="email" class="form-control" [(ngModel)]="user.email" name="email" #email="ngModel"
+                    required placeholder="name@example.com" />
+                </div>
+                <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
+                  <div *ngIf="email.errors.required">Email is required.</div>
 
-    <ion-item class="input-circle">
-      <ion-icon name="mail-outline" slot="start"></ion-icon>
-      
-      <ion-input [(ngModel)]="driver.email" name="email" #email="ngModel" required placeholder="Email" id="email"
-        type="email">
-      </ion-input>
-    </ion-item>
-    <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
-      <div *ngIf="email.errors.required">Email is required</div>
-    </div>
-    
-    <div class="form-group">
-      <ion-item class="input-circle">
-        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
-        <ion-input [(ngModel)]="driver.password" name="password" #password="ngModel" required placeholder="Password"
-          id="password" type="password"></ion-input>
-      </ion-item>
-      <div class="alert alert-danger" *ngIf="password.touched && !password.valid">
-        <div *ngIf="password.errors.required">Password is required</div>
+                </div>
+              </div>
+              <div class="form-group mb-4">
+                <div class="d-flex align-items-center justify-content-between">
+                  <div>
+                    <label class="form-control-label">Password</label>
+                  </div>
+                  <div class="mb-2">
+                    <a href="#!" class="small text-muted text-underline--dashed border-primary">Forgot password?</a>
+                  </div>
+                </div>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <ion-icon name="key-outline"></ion-icon>
+                    </span>
+                  </div>
+                  <input type="password" class="form-control" id="password-input" placeholder="********" required
+                    [(ngModel)]="user.password" name="password" #password="ngModel">
+                  <div *ngIf="show" class="input-group-append">
+                    <span class="input-group-text" (click)="showPassword()">
+                      <ion-icon id="pass-icon" name="eye-outline"></ion-icon>
+                    </span>
+                  </div>
+                  <div *ngIf="!show" class="input-group-append">
+                    <span class="input-group-text" (click)="showPassword()">
+                      <ion-icon id="pass-icon" name="eye-off-outline"></ion-icon>
+                    </span>
+                  </div>
+                </div>
+                <div class="alert alert-danger" *ngIf="password.touched && !password.valid">
+                  <div *ngIf="password.errors.required">Password is required.</div>
+                </div>
+              </div>
+              <div class="mt-4">
+                <button type="button" class="btn btn-block btn-primary" [disabled]="!loginForm.form.valid" (click)="login()">Sign in</button></div>
+            </form>
+            <div class="mt-4 text-center"><small>Not registered?</small>&nbsp;
+              <a class="small font-weight-bold" href="javascript:;"
+                (click)="this.router.navigateByUrl('registration')">Create account</a></div>
+          </div>
+        </div>
       </div>
     </div>
-
-    
-    <div class="mt-4">
-      <button class="button button-large" type="submit" [disabled]="!loginform.form.valid"
-        (click)="this.router.navigateByUrl('welcome')">
-        <span class="btn-inner--text">Login</span>
-        <span class="btn-inner--icon"><i class="fas fa-long-arrow-alt-right"></i></span></button>
-    </div>
-  </form>
+  </div>
 
 </ion-content>

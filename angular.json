@@ -98,8 +98,19 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "styles": [],
-            "scripts": [],
+            "styles": [
+              {
+                "input": "src/assets/scss/purpose-dark.scss"
+              }
+            ],
+            "scripts": [
+              {
+                "input": "src/assets/js/purpose.core.js"
+              },
+              {
+                "input": "src/assets/js/purpose.js"
+              }
+            ],
             "assets": [
               {
                 "glob": "favicon.ico",

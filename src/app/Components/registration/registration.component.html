@@ -1,136 +1,199 @@
-
 <ion-header>
   <ion-toolbar>
-    <ion-title>Create Account</ion-title>
-    <ion-icon (click)="goBacktoLogin()"name="arrow-back-outline" slot="start"></ion-icon>
+    <ion-title class="h3 row justify-content-center">Create Account</ion-title>
+    <ion-icon (click)="goBacktoLogin()" name="arrow-back-outline" slot="start" style="zoom:2.0;"></ion-icon>
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <div class="container min-vh-100 d-flex align-items-center">
+    <div class="col py-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+          <div>
+            <form #registrationForm="ngForm">
 
-  <form #registerForm="ngForm">
-    <ion-list lines="none">
-      
-      <div class="form-group">
-        <ion-item >
-          <ion-label></ion-label>>
-          <ion-input class="input-circle"[(ngModel)]="driver.firstName" name="firstName" #firstName="ngModel" type="text" required
-            placeholder="First name"></ion-input>
-        </ion-item>
-        <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
-          <div class ="errorMsg" *ngIf="firstName.errors.required">First name is required</div>
+              <div class="form-group">
+                <label class="form-control-label">First Name</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="text" class="form-control" [(ngModel)]="user.firstName" name="firstName"
+                    #firstName="ngModel" required>
+                </div>
+                <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
+                  <div *ngIf="firstName.errors.required">First name is required</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-control-label">Last Name</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="text" class="form-control" [(ngModel)]="user.lastName" name="lastName"
+                    #lastName="ngModel" required>
+                </div>
+                <div class="alert alert-danger" *ngIf="lastName.touched && !lastName.valid">
+                  <div *ngIf="lastName.errors.required">Last name is required</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-control-label">Email address</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="email" class="form-control" id="input-email" placeholder="name@example.com" required
+                    [(ngModel)]="user.email" name="email" #email="ngModel"
+                    pattern="[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$">
+                </div>
+                <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
+                  <div *ngIf="email.errors.required">Email is required.</div>
+                  <div *ngIf="email.errors.pattern">Invalid email format.</div>
+                </div>
+              </div>
+
+              <div class="form-group mb-4">
+                <label class="form-control-label">Password</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                  </div>
+                  <input type="password" class="form-control" id="input-password" placeholder="********" required
+                    [(ngModel)]="user.password" name="password" #password="ngModel" minlength="8" maxlength="20"
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&]).{8,20}">
+                </div>
+                <div class="alert alert-danger" *ngIf="password.touched && !password.valid">
+                  <div *ngIf="password.errors.required">Password is required</div>
+                  <div *ngIf="password.errors.pattern">Must contain an uppercase letter, a number, a
+                    special character, and be
+                    between 8-20 characters</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-control-label">Confirm password</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                  </div>
+                  <input type="password" class="form-control" id="confirmPass" placeholder="********"
+                    (change)="passConfirm()" [(ngModel)]="account.confirmPass" name="confirmPass" #confirmPass="ngModel"
+                    minlength="8" maxlength="20" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&]).{8,20}">
+                </div>
+                <div class="alert alert-danger" *ngIf="confirmPass.touched  && !account.isConfirmed">
+                  <div ng>Password does not match</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-control-label">Date of birth</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="date" class="form-control" placeholder="YYYY/MM/DD" [(ngModel)]="user.birthDate"
+                    name="birthDate" #birthDate="ngModel" required>
+                </div>
+                <div class="alert alert-danger" *ngIf="birthDate.touched && !birthDate.valid">
+                  <div *ngIf="birthDate.errors.required">Date of birth is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-control-label">Phone Number</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="text" inputmode="tel" pattern="^((?!(0))[0-9]{10})$" required class="form-control"
+                    placeholder="6131234576" [(ngModel)]="user.phone_number" name="phoneNumber" #phoneNumber="ngModel"
+                    minlength="10" maxlength="10">
+                </div>
+                <div class="alert alert-danger" *ngIf="phoneNumber.touched && !phoneNumber.valid">
+                  <div *ngIf="phoneNumber.errors.required">Phone number is required</div>
+                  <div *ngIf="phoneNumber.errors.pattern">Phone number must be a length of 10, and can not start with 0
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-control-label">Address 1</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="123 abc street" [(ngModel)]="user.address_line_1"
+                    name="address1" #address1="ngModel" required>
+                </div>
+                <div class="alert alert-danger" *ngIf="address1.touched && !address1.valid">
+                  <div *ngIf="address1.errors.required">Address 1 is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-control-label">Address 2</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="456 abc street (optional)"
+                    [(ngModel)]="user.address_line_2" name="address2" #address1="ngModel">
+                </div>
+
+              </div>
+              <div class="form-group">
+                <label class="form-control-label">City</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Ottawa" [(ngModel)]="user.city" name="city"
+                    #city="ngModel" required>
+                </div>
+                <div class="alert alert-danger" *ngIf="city.touched && !city.valid">
+                  <div *ngIf="city.errors.required">City is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-control-label">Province</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="ON" [(ngModel)]="user.area" name="area"
+                    #area="ngModel" required>
+                </div>
+                <div class="alert alert-danger" *ngIf="area.touched && !area.valid">
+                  <div *ngIf="area.errors.required">Province is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-control-label">Postal Code</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="text" class="form-control" id="input-email" placeholder="A1B2C3"
+                    [(ngModel)]="user.postal_code" name="postalCode" #postalCode="ngModel" required
+                    pattern="^[A-Za-z]\d[A-Za-z]\d[A-Za-z]\d$" maxlength="6" minlength="6">
+                </div>
+                <div class="alert alert-danger" *ngIf="(postalCode.touched || postalCode.dirty) && !area.valid">
+                  <div *ngIf="postalCode.errors.required">Postal code is required</div>
+                  <div *ngIf="postalCode.errors.pattern">Invalid postal code. (Ex: ABC123)</div>
+                </div>
+              </div>
+
+              <div class="mt-4">
+                <button type="button" class="btn btn-block btn-primary" [disabled]="!registrationForm.form.valid" (click)="signUp(registrationForm)">Sign Up</button></div>
+            </form>
+            <div class="mt-4 text-center"><small>Already have an acocunt?</small>
+              <a class="small font-weight-bold"href="javascript:;"
+              (click)="this.router.navigateByUrl('login')">&nbsp;Sign in</a></div>
+          </div>
         </div>
       </div>
-
-      <div class="form-group">
-        <ion-item class="input-circle">
-          <ion-label ></ion-label>
-          <ion-input [(ngModel)]="driver.lastName" name="lastName" #lastName="ngModel" type="text" required
-            placeholder="Last name"></ion-input>
-        </ion-item>
-        <div class="alert alert-danger" *ngIf="lastName.touched && !lastName.valid">
-          <div class ="errorMsg" *ngIf="lastName.errors.required">Last name is required</div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <ion-item class="input-circle">
-          <ion-label></ion-label>
-          <ion-input [(ngModel)]="driver.email" name="email" #email="ngModel" required placeholder="Email" id="email"
-            type="email" pattern="[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$">
-          </ion-input>
-        </ion-item>
-        <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
-          <div class ="errorMsg" *ngIf="email.errors.required">Email is required.</div>
-          <div class ="errorMsg" *ngIf="email.errors.pattern">Invalid email format.</div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <ion-item class="input-circle">
-          <ion-label></ion-label>
-          <ion-input [(ngModel)]="driver.password" name="password" #password="ngModel" required placeholder="Password"
-            id="password" type="password" minlength="8" maxlength="20"
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&]).{8,20}">
-          </ion-input>
-        </ion-item>
-        <div class="alert alert-danger" *ngIf="password.touched && !password.valid">
-          <div class ="errorMsg" *ngIf="password.errors.required">Password is required</div>
-          <div class ="errorMsg" *ngIf="password.errors.pattern">Must contain an uppercase letter, a number, a special character, and be
-            between 8-20 characters</div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <ion-item class="input-circle">
-          <ion-label></ion-label>
-          <ion-input [(ngModel)]="driver.phoneNumber" name="phoneNum" #phoneNum="ngModel" required
-            placeholder="Phone Number" id="phoneNum"></ion-input>
-        </ion-item>
-        <div class="alert alert-danger" *ngIf="phoneNum.touched && !phoneNum.valid">
-          <div class ="errorMsg" *ngIf="phoneNum.errors.required">Phone number is required</div>
-        </div>
-      </div>
-
-      <div class="form-group">
-
-        <ion-item class="input-circle">
-          <ion-label>Make</ion-label>
-          <ion-select [(ngModel)]="driver.carMake" name="carMake" #carMake="ngModel" id="carMake" required
-            placeholder="Select Make">
-            <ion-select-option *ngFor="let a of carMakes" [value]="a.name">{{a.name}}</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <div class="alert alert-danger" *ngIf="carMake.touched && !carMake.valid">
-          <div class ="errorMsg" *ngIf="carMake.errors.required">Car make is required.</div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <ion-item class="input-circle">
-          <ion-label></ion-label>
-          <ion-input [(ngModel)]="driver.carModel" name="model" #model="ngModel" required placeholder="Car Model"
-            id="model" type="text"></ion-input>
-        </ion-item>
-        <div class="alert alert-danger" *ngIf="model.touched && !model.valid">
-          <div class ="errorMsg" *ngIf="model.errors.required">Model is required.</div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <ion-item class="input-circle">
-          <ion-label></ion-label>
-          <ion-input [(ngModel)]="driver.carColor" name="carColor" #carColor="ngModel" required
-            placeholder="Car Colour">
-          </ion-input>
-        </ion-item>
-        <div class="alert alert-danger" *ngIf="carColor.touched && !carColor.valid">
-          <div class ="errorMsg" *ngIf="carColor.errors.required">Car colour is required.</div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <ion-item class="input-circle">
-          <ion-label></ion-label>
-          <ion-input [(ngModel)]="driver.carPlate" name="carPlate" #carPlate="ngModel" required
-            placeholder="License Plate" id="carPlate">
-          </ion-input>
-        </ion-item>
-        <div class="alert alert-danger" *ngIf="carPlate.touched && !carPlate.valid">
-          <div class ="errorMsg" m *ngIf="carPlate.errors.required">License plate is required</div>
-        </div>
-      </div>
-
-
-      <div>
-        <ion-button expand="block" fill="outline" [disabled]="!registerForm.form.valid" (click)="signUp(registerForm)">
-          Register</ion-button>
-      </div>
-
-      <div>
-        <ion-button expand="block" fill="outline" (click)="goBacktoLogin()">Cancel</ion-button>
-      </div>
-    </ion-list>
-
-  </form>
+    </div>
+  </div>
 
 </ion-content>
