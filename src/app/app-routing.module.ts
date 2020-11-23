@@ -30,6 +30,10 @@ const routes: Routes = [
 {
   path: 'vehicle',
   loadChildren: 'src/app/Components/vehicle/vehicle.module#VehicleComponentModule'
+},
+{
+  path: 'addVehicle',
+  loadChildren: 'src/app/Components/vehicle/vehicle.add.module#VehicleAddComponentModule'
 }
 ];
 

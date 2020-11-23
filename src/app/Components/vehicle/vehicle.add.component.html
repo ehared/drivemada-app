@@ -1,0 +1,84 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title class="h3 text-center" text-center>Add Vehicle</ion-title>
+        <ion-icon (click)="goBackVehicles()" name="arrow-back-outline" slot="start" style="zoom:2.0;"></ion-icon>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="container min-vh-100 d-flex align-items-center">
+        <div class="col py-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                    <div>
+                        <form #vehicleForm="ngForm">
+
+                            <div class="form-group">
+                                <label class="form-control-label">Make</label>
+                                <div class="input-group input-group-merge">
+                                    <input type="text" class="form-control" [(ngModel)]="vehicle.make" name="make"
+                                        #make="ngModel" required>
+                                </div>
+                                <div class="alert alert-danger" *ngIf="make.touched && !make.valid">
+                                    <div *ngIf="make.errors.required">Make is required</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-control-label">Model</label>
+                                <div class="input-group input-group-merge">
+                                    <input type="text" class="form-control" [(ngModel)]="vehicle.model" name="model"
+                                        #model="ngModel" required>
+                                </div>
+                                <div class="alert alert-danger" *ngIf="model.touched && !model.valid">
+                                    <div *ngIf="model.errors.required">Model is required</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-control-label">Year</label>
+                                <div class="input-group input-group-merge">
+                                    <input type="number" class="form-control" id="input-year" placeholder="2020"
+                                        required [(ngModel)]="vehicle.year" name="year" #year="ngModel">
+                                </div>
+                                <div class="alert alert-danger" *ngIf="year.touched && !year.valid">
+                                    <div *ngIf="year.errors.required">Year is required.</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-control-label">Colour</label>
+                                <div class="input-group input-group-merge">
+                                    <input type="text" class="form-control" placeholder="red"
+                                        [(ngModel)]="vehicle.colour" name="colour" #colour="ngModel"
+                                        required>
+                                </div>
+                                <div class="alert alert-danger" *ngIf="colour.touched && !colour.valid">
+                                    <div *ngIf="colour.errors.required">Colour is required</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-control-label">License Plate</label>
+                                <div class="input-group input-group-merge">
+                                    <input type="text" class="form-control" placeholder="ABC 123"
+                                        [(ngModel)]="vehicle.licensePlate" name="address1" #licensePlate="ngModel"
+                                        required>
+                                </div>
+                                <div class="alert alert-danger" *ngIf="licensePlate.touched && !licensePlate.valid">
+                                    <div *ngIf="licensePlate.errors.required">License plate is required</div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <button type="button" class="btn btn-block btn-primary"
+                                    [disabled]="!vehicleForm.form.valid" (click)="addVehicle(vehicleForm)">Add
+                                    Vehicle</button></div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ion-content>

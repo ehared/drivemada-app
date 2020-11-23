@@ -1,3 +1,32 @@
-<div>
-  <p>Welcome</p>
-</div>
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="h3 text-center" text-center>Welcome {{user.firstName}}</ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar color="primary">
+    <ion-segment value="all">
+      <ion-segment-button value="all">
+        Online
+      </ion-segment-button>
+      <ion-segment-button value="favorites">
+        Offline
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+</ion-header>
+<ion-content>
+
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+
+    <ion-icon name="car-sport-outline" slot="start" style="zoom:2.0;"></ion-icon>
+    &nbsp;{{vehicle.make}}&nbsp;{{vehicle.model}}&nbsp;&nbsp;
+    {{vehicle.licensePlate}}
+    
+    <ion-icon name="pencil-outline" slot="end" style="zoom: 1.0;"></ion-icon>
+
+  </ion-toolbar>
+</ion-footer>
