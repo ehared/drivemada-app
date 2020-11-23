@@ -26,6 +26,10 @@ const routes: Routes = [
 {
   path: 'editAcct',
   loadChildren: 'src/app/Components/edit-acct/edit-acct.module#EditAcctComponentModule'
+},
+{
+  path: 'vehicle',
+  loadChildren: 'src/app/Components/vehicle/vehicle.module#VehicleComponentModule'
 }
 ];
 

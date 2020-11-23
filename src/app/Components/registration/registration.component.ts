@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core'
 import { User } from 'src/app/Models/user';
-import { UserService } from 'src/app/Services/userService';
+import { UserService } from 'src/app/Services/user.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
-import {share} from 'rxjs/operators';
+import { share } from 'rxjs/operators';
+import { UtilService } from 'src/app/Services/util.service';
 
 @Component({
   selector: 'app-registration',
@@ -19,14 +20,21 @@ export class RegistrationComponent {
     confirmPass: string,
     isConfirmed: boolean
   } = {
-    confirmPass : '',
-    isConfirmed: false,
-  }
-  
+      confirmPass: '',
+      isConfirmed: false,
+    }
 
-  constructor(public router: Router,
-    private http: HttpClient, private userService: UserService, private toastrService: ToastrService) { }
+/**
+ * 
+ * @param router - router used to navigate through url pages
+ * @param userService - service used to make user specific api calls
+ * @param utilService - service used to create toasts, alerts, and print messages onto console
+ */
+  constructor(public router: Router, private userService: UserService, private utilService: UtilService) { }
 
+  /**
+   * Checks to see the password entered in both password and confirm password field match
+   */
   passConfirm() {
     if (this.user.password === this.account.confirmPass) {
       this.account.isConfirmed = true;
@@ -37,34 +45,52 @@ export class RegistrationComponent {
       console.log("passwords do not match");
     }
   }
-  signUp(form:any) {
+
+  /**
+   * Creates a user account
+   * @param form 
+   */
+  signUp(form: any) {
     /*
        this.http.post('https://localhost:44397/api/registration', this.driver).subscribe((res) => {
        console.log(res)
        this.router.navigateByUrl('welcome');
      });
     */
-    console.log(this.user);
-    var formData = this.userService.jsonToFormData(this.user);
-    this.userService.create(formData).pipe(share()).subscribe((response: any)  => {
+    /* convert user model to formData to send to the server */
+
+    var formData = this.utilService.jsonToFormData(this.user);
+    this.userService.create(formData).pipe(share()).subscribe((response: any) => {
+      /* user was successfully added to caremada database, navigate to login and presenet alert  */
       console.log(this.user);
       this.router.navigateByUrl('login');
-      console.log("User was created. Check DB");
-      this.toastrService.success("Please check your email to validate your account.");
-    },(err) =>{
-        if(err.status === 400){
-          console.log("Email already exists");
-        }
-        if(err.status === 500) {
-          console.log("Error occured while trying to create account");
-        }
+      this.utilService.logResponeToConsole(response);
+      this.utilService.presentAlert("Please check your email to validate your account");
+    }, (err) => {
+      /* unsuccessful in adding user to the caremada database */
+      if (err.status === 400) {
+        console.log("Email already exists");
+      }
+      if (err.status === 500) {
+        console.log("Error occured while trying to create account");
+      }
+      this.utilService.presentToast("Unable to create account.")
+      this.utilService.logErrorToConsole(err);
     });
 
   }
+  /**
+   *  Navigates to the login page
+   */
   goBackToLogin() {
     this.router.navigateByUrl('welcome');
   }
-  getAge (dateOfBirth: string){
+
+  /**
+   * Checks to see if the user is of age to register (not implmented yet)
+   * @param dateOfBirth - string representation of DOB
+   */
+  getAge(dateOfBirth: string) {
 
     var today = new Date();
     var birthDate = new Date(dateOfBirth);
