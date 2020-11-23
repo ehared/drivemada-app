@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title class="h3 row justify-content-center">Create Account</ion-title>
-    <ion-icon (click)="goBacktoLogin()" name="arrow-back-outline" slot="start" style="zoom:2.0;"></ion-icon>
+    <ion-title class="h3 text-center">Create Account</ion-title>
+    <ion-icon (click)="goBackToLogin()" name="arrow-back-outline" slot="start" style="zoom:2.0;"></ion-icon>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -174,7 +174,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                   </div>
-                  <input type="text" class="form-control" id="input-email" placeholder="A1B2C3"
+                  <input type="text" class="form-control" placeholder="A1B2C3"
                     [(ngModel)]="user.postal_code" name="postalCode" #postalCode="ngModel" required
                     pattern="^[A-Za-z]\d[A-Za-z]\d[A-Za-z]\d$" maxlength="6" minlength="6">
                 </div>

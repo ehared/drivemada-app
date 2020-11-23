@@ -10,9 +10,12 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {ToastrModule} from 'ngx-toastr'
-import {UserService} from 'src/app/Services/userService'
+import {UserService} from 'src/app/Services/user.service'
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UtilService } from './Services/util.service';
+import { IonicStorageModule } from '@ionic/storage'
+import { StorageService } from './Services/storage.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,11 +26,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    IonicStorageModule.forRoot()
+    
   ],
   providers: [
     UserService,
+    UtilService,
+    StorageService,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

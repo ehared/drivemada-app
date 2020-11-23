@@ -9,7 +9,7 @@
               <p class="text-muted mb-0">Sign in to your account to continue.</p>
             </div>
             <span class="clearfix"></span>
-            <form #loginForm="ngForm">
+            <form #loginForm="ngForm" (ngSubmit)="login()">
               <div class="form-group">
                 <label class="form-control-label">Email address</label>
                 <div class="input-group input-group-merge">
@@ -59,7 +59,7 @@
                 </div>
               </div>
               <div class="mt-4">
-                <button type="button" class="btn btn-block btn-primary" [disabled]="!loginForm.form.valid" (click)="login()">Sign in</button></div>
+                <button type="submit" class="btn btn-block btn-primary" [disabled]="!loginForm.form.valid" (click)="login()">Sign in</button></div>
             </form>
             <div class="mt-4 text-center"><small>Not registered?</small>&nbsp;
               <a class="small font-weight-bold" href="javascript:;"
