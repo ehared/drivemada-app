@@ -1,15 +1,25 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Edit Account</ion-title>
+    <ion-title style="cursor:pointer" (click)="back()">Edit Account</ion-title>
     <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-item>
-      <ion-icon name="pin" slot="start"></ion-icon>
-      <img src="">
+
+
+    <ion-item class="field">
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input [(ngModel)]="email" type="email"></ion-input>
     </ion-item>
-  </ion-card>
+    <ion-item class="field">
+      <ion-label position="stacked" >Password</ion-label>
+      <ion-input [(ngModel)]="password" type="password"></ion-input>
+    </ion-item>
+    <ion-item class="field">
+      <ion-label position="stacked" >Phone Number</ion-label>
+      <ion-input [(ngModel)]="phoneNumber" type="tel"></ion-input>
+    </ion-item>
+    <ion-button (click)="editAccount()" class="saveButton" shape="round" fill="outline">Save</ion-button>
+       
 </ion-content>
