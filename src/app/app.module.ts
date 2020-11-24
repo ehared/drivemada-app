@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UtilService } from './Services/util.service';
 import { IonicStorageModule } from '@ionic/storage'
 import { StorageService } from './Services/storage.service';
+import { VehicleService } from './Services/vehicle.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,6 +36,7 @@ import { StorageService } from './Services/storage.service';
     UserService,
     UtilService,
     StorageService,
+    VehicleService,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

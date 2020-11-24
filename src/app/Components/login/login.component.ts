@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UtilService } from 'src/app/Services/util.service';
 import { Item, StorageService } from 'src/app/Services/storage.service';
 import { Storage } from '@ionic/storage'
+import { VehicleService } from 'src/app/Services/vehicle.service';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class LoginComponent {
   user = new User;
   show: boolean = false;
   item: Item = <Item>{};
+  isDriver: boolean = false;
 
   /**
    * The constructor for LoginComponent
@@ -26,7 +28,7 @@ export class LoginComponent {
    * @param userService - service to make api calls regarding a user 
    * @param utilService - service to create alerts, toasts or print messages to the console
    */
-  constructor(public router: Router, private userService: UserService, private utilService: UtilService, private storageServ: StorageService) { }
+  constructor(public router: Router, private userService: UserService, private utilService: UtilService, private storageServ: StorageService, private vehService: VehicleService) { }
 
   /**
    * Shows or hides the password entered into the password field
@@ -54,13 +56,29 @@ export class LoginComponent {
       let token = response.data['token'];
       this.item.key = "user";
       this.item.value = JSON.stringify(response.data['user']);
+      this.user = response.data["user"];
       this.storageServ.add(this.item);
       this.userService.loggedIn(token);
 
-      this.router.navigateByUrl('vehicle');
+     this.checkDriver();
     }, err => {
       /* log in was unsuccesful */
       this.utilService.presentToast("Unsuccessful login. Please check your email or password");
     })
+  }
+  checkDriver() {
+    this.vehService.get(this.user.id).pipe(share()).subscribe((response: any) => {
+   
+      if(response){ // user already registered a vehicle
+        console.log(response);
+        this.router.navigateByUrl('vehicle');
+      }
+      else {
+        this.router.navigateByUrl('addVehicle');
+      }
+      
+    }, err=> {
+      this.router.navigateByUrl('addVehicle');
+    });
   }
 }
