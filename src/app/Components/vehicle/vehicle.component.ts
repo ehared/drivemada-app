@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, AfterContentInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/Models/user';
 import {Storage} from '@ionic/storage'
@@ -7,6 +7,7 @@ import { VehicleService } from 'src/app/Services/vehicle.service';
 import { share } from 'rxjs/operators';
 import { Vehicle } from 'src/app/Models/vehicle';
 
+declare var google: any;
 @Component({
   selector: 'app-vehicle',
   templateUrl: './vehicle.component.html',
@@ -14,6 +15,8 @@ import { Vehicle } from 'src/app/Models/vehicle';
 })
 export class VehicleComponent implements OnInit {
 
+  map;
+  @ViewChild('mapElement', {static: true}) mapElement : ElementRef;
   user: User = new User();
   item: Item = <Item>{};
   vehicle: Vehicle = new Vehicle();
@@ -34,9 +37,18 @@ export class VehicleComponent implements OnInit {
         });
       }
     })
-
+    this.setMap();
     
    
+  }
+ setMap(): void {
+    this.map = new google.maps.Map(
+      this.mapElement.nativeElement,
+      {
+        center:{lat: 45.355178, lng: -75.760774 },
+        zoom: 16
+      });
+    
   }
   addVehicle(){
     this.router.navigateByUrl('addVehicle');
