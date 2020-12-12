@@ -19,29 +19,31 @@ export class User {
     firstName: string;
     lastName: string;
     birthDate: Date;
-    phone_number: string;
+    phoneNumber: string;
     about?: string;
 
     // location date table
-    address_line_1: string;
-    address_line_2: string;
-    area?: string;
+    addressLine1: string;
+    addressLine2: string;
+    area: string;
     city: string;
-    state: string;
-    postal_code: string;
+    state?: string;
+    postalCode: string;
     country: string;
 
     constructor(){
+        this.email = '';
+        this.password = '';
         this.firstName = '';
         this.lastName = '';
         this.birthDate = null;
-        this.phone_number = '';
-        this.address_line_1 = '';
-        this. address_line_2 = '';
+        this.phoneNumber = '';
+        this.addressLine1 = '';
+        this.addressLine2 = '';
         this.city = '';
-        this.state = '';
-        this.postal_code = '';
-        this.country = '';
+        this.area = '';
+        this.postalCode = '';
+        this.country = 'CA';
 
     }
    

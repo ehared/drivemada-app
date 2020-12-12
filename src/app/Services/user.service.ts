@@ -21,13 +21,13 @@ export class UserService {
     }
 
     getAuthHeaders() {
-        return {headers: new HttpHeaders().set('Authorization', 'Bearer' + this.auth)};
+        return {headers: new HttpHeaders().set("Authorization", "Bearer" + this.auth)};
     }
     login(user: FormData) {
 
         return this.http.post(this.url + '/auth', user);
     }
-    
+    //
     loggedIn(token: string){
         
         this.setAuthToken(token); // save token
@@ -40,13 +40,19 @@ export class UserService {
             this.settings.setValue('user', null);
         });*/
     }
-    create(formData : FormData) {
-        return this.http.post(this.url + '/users', formData);
+    create(user:any) {
+        
+        return this.http.post(this.url + '/users', user);
     }
 
     get(user: User) {
         return this.http.get<User>(this.url + '/users/' + user.id)
 
+    }
+
+    getSelf(){
+        debugger;
+        return this.http.get<User>(this.url,  this.getAuthHeaders());
     }
 
   //  updateUser(user: FormData) {
