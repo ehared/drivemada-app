@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title class="h3 text-center" text-center>Create Account</ion-title>
+  <ion-toolbar class="toolbar-header">
+    <ion-title class="h3 text-center" style="color: white; font-weight: 700;">Create Account</ion-title>
     <ion-icon (click)="goBackToLogin()" name="arrow-back-outline" slot="start" style="zoom:2.0;"></ion-icon>
   </ion-toolbar>
 </ion-header>
@@ -109,7 +109,7 @@
                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                   </div>
                   <input type="text" inputmode="tel" pattern="^((?!(0))[0-9]{10})$" required class="form-control"
-                    placeholder="6131234576" [(ngModel)]="user.phone_number" name="phoneNumber" #phoneNumber="ngModel"
+                    placeholder="6131234576" [(ngModel)]="user.phoneNumber" name="phoneNumber" #phoneNumber="ngModel"
                     minlength="10" maxlength="10">
                 </div>
                 <div class="alert alert-danger" *ngIf="phoneNumber.touched && !phoneNumber.valid">
@@ -124,7 +124,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                   </div>
-                  <input type="text" class="form-control" placeholder="123 abc street" [(ngModel)]="user.address_line_1"
+                  <input type="text" class="form-control" placeholder="123 abc street" [(ngModel)]="user.addressLine1"
                     name="address1" #address1="ngModel" required>
                 </div>
                 <div class="alert alert-danger" *ngIf="address1.touched && !address1.valid">
@@ -138,7 +138,7 @@
                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                   </div>
                   <input type="text" class="form-control" placeholder="456 abc street (optional)"
-                    [(ngModel)]="user.address_line_2" name="address2" #address1="ngModel">
+                    [(ngModel)]="user.addressLine2" name="address2" #address1="ngModel">
                 </div>
 
               </div>
@@ -175,7 +175,7 @@
                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                   </div>
                   <input type="text" class="form-control" placeholder="A1B2C3"
-                    [(ngModel)]="user.postal_code" name="postalCode" #postalCode="ngModel" required
+                    [(ngModel)]="user.postalCode" name="postalCode" #postalCode="ngModel" required
                     pattern="^[A-Za-z]\d[A-Za-z]\d[A-Za-z]\d$" maxlength="6" minlength="6">
                 </div>
                 <div class="alert alert-danger" *ngIf="(postalCode.touched || postalCode.dirty) && !area.valid">

@@ -5,7 +5,7 @@ export class Vehicle {
     colour: string;
     year?: number;
     licensePlate: string;
-    userId: number;
+    size: string;
 
     constructor() {
 
@@ -13,5 +13,6 @@ export class Vehicle {
         this.model = '';
         this.colour = '';
         this.licensePlate = '';
+        this.size = '';
     }
 }

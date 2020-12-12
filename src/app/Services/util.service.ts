@@ -33,6 +33,13 @@ export class UtilService {
         (await alert).present()
     }
 
+    async presentAlertOptions(msg:string) {
+        let alert = this.alertCtlr.create ({
+            message: msg,
+            buttons: ['Yes', 'No']
+        });
+      (await alert).present;
+    }
     /**
      * Converts JSON to FormData
      * @param json - json to be converted
