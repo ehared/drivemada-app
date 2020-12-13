@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-
 import { User } from 'src/app/Models/user'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
+import { Router } from '@angular/router';
+import { StorageService } from 'src/app/Services/storage.service';
+import { CURRENT_USER_KEY, VEHCILE_KEY } from '../Models/cacheKeys';
 
 
 
@@ -10,11 +12,12 @@ import { Storage } from '@ionic/storage';
 export class UserService {
 
     //url: string = 'https://drivemada-mobile.herokuapp.com';
-    url: string = "https://ambitiously-aurochs-microfarad.herokuapp.com"
+    //url: string = "https://ambitiously-aurochs-microfarad.herokuapp.com";
+    url: string = "http://localhost:3001";
     auth:string;
     isLoggedIn: boolean = false;
 
-    constructor(private http: HttpClient, private storage: Storage) { }
+    constructor(private http: HttpClient, private storageService: StorageService, private router: Router) { }
     
     setAuthToken(token: string) {
         this.auth = token;
@@ -36,13 +39,12 @@ export class UserService {
 
     logout(){
         this.setAuthToken(null);
-      /*  this.settings.load().then(()=>{
-            this.settings.setValue('user', null);
-        });*/
+        this.storageService.deleteKey(CURRENT_USER_KEY);
+        this.storageService.deleteKey(VEHCILE_KEY);
+        this.router.navigateByUrl('welcome', { replaceUrl: true });
     }
     create(user:any) {
-        
-        return this.http.post(this.url + '/users', user);
+        return this.http.post(this.url + '/users', JSON.parse(user));
     }
 
     get(user: User) {
@@ -51,7 +53,6 @@ export class UserService {
     }
 
     getSelf(){
-        debugger;
         return this.http.get<User>(this.url,  this.getAuthHeaders());
     }
 

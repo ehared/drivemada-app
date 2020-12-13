@@ -7,8 +7,9 @@ import { VehicleService } from 'src/app/Services/vehicle.service';
 import { share } from 'rxjs/operators';
 import { Vehicle } from 'src/app/Models/vehicle';
 import { UtilService } from 'src/app/Services/util.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
 import { UserService } from 'src/app/Services/user.service';
+import { CURRENT_USER_KEY } from 'src/app/Models/cacheKeys';
 
 declare var google: any;
 @Component({
@@ -26,11 +27,11 @@ export class VehicleComponent implements OnInit {
   selectedVehicle: Vehicle;
 
   constructor(private userService: UserService, private alertCtrl: AlertController, private storage: StorageService, private router: Router, private vehService: VehicleService, private utilService: UtilService,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute, private menuController: MenuController) {
     this.activatedRoute.params.subscribe(() => {
-      this.storage.get("user").then((item) => {
+      this.storage.getValue(CURRENT_USER_KEY).then((item: User) => {
         if (item) {
-          this.user = JSON.parse(item.value);
+          this.user = item;
           //debugger
           this.vehService.get(this.user.id).subscribe((response: Vehicle[]) => {
             if (response) {
@@ -40,28 +41,23 @@ export class VehicleComponent implements OnInit {
         }
       });
     });
+
+    this.menuController.enable(true);
   }
 
   ngOnInit() { }
 
-
-  //  setMap(): void {
-  //     this.map = new google.maps.Map(
-  //       this.mapElement.nativeElement,
-  //       {
-  //         center:{lat: 45.355178, lng: -75.760774 },
-  //         zoom: 16
-  //       });
-
-  //   }
   onSelect(vehicle: Vehicle) {
-    this.selectedVehicle = vehicle;
-    console.log("Selected: " + this.selectedVehicle.id);
+    
+    console.log("Selected: " + vehicle.id);
+
+    if(vehicle != null){
+      this.router.navigateByUrl('requests', { state: vehicle });
+    }
 
   }
 
   onDelete(vehicle: Vehicle) {
-    //debugger;
     console.log("Deleting vehicle with id= " + vehicle.id);
 
     this.vehService.delete(vehicle.id).subscribe(() => {

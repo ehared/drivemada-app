@@ -15,13 +15,8 @@ export class AppComponent implements OnInit {
   public appPages = [
     {
       title: 'Drive',
-      url: '/drive',
+      url: '/vehicle',
       icon: 'car-sport'
-    },
-    {
-      title: 'Inbox',
-      url: '/inbox',
-      icon: 'mail'
     },
     {
       title: 'Account',
@@ -29,9 +24,9 @@ export class AppComponent implements OnInit {
       icon: 'person'
     },
     {
-      title: 'Payments',
-      url: '/payments',
-      icon: 'card'
+      title: 'Trips',
+      url: '/trips',
+      icon: 'time'
     },
     {
       title: 'Settings',

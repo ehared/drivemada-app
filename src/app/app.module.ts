@@ -17,6 +17,7 @@ import { UtilService } from './Services/util.service';
 import { IonicStorageModule } from '@ionic/storage'
 import { StorageService } from './Services/storage.service';
 import { VehicleService } from './Services/vehicle.service';
+import {RequestService} from './Services/requests.service'
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,6 +38,7 @@ import { VehicleService } from './Services/vehicle.service';
     UtilService,
     StorageService,
     VehicleService,
+    RequestService,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

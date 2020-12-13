@@ -57,7 +57,7 @@ export class RegistrationComponent {
     let jsonString = JSON.stringify(this.user);
     this.userService.create(jsonString).subscribe((response: any) => {
       /* user was successfully added to caremada database, navigate to login and presenet alert  */
-      debugger;
+      
       console.log(jsonString);
       this.router.navigateByUrl('login');
       this.utilService.presentAlert("Please check your email to validate your account");
