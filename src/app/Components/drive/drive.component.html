@@ -1,3 +1,18 @@
-<p>
-  drive works!
-</p>
+<ion-header>
+  <ion-toolbar class="toolbar-header">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="h3 text-center" style="color: white; font-weight: 700;"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-spinner *ngIf="loading"></ion-spinner>
+  <div #mapElement class="map"></div>
+</ion-content>
+
+<ion-footer>
+  <ion-button class="startTripButton" expand="full" fill="solid" style="font-weight: 700;" type="button" (click)="startTrip()">Start Trip</ion-button>
+  <ion-button class="startTripButton" expand="full" fill="solid" style="font-weight: 700;" type="button" (click)="completedTrip()">Trip Completed</ion-button>
+</ion-footer>

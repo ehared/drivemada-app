@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar class="toolbar-header" (click)="showMenu()">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="h3 text-center" style="color: white; font-weight: 700;">Trips</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list-header lines="full" *ngIf="requests.length == 0">
+    <ion-label>No trip history</ion-label>
+  </ion-list-header>
+  <ion-list>
+    <ion-card *ngFor="let r of requests">
+
+      <ion-item><b>From:</b>&nbsp;{{r.sourceAddress}}</ion-item>
+      <ion-item><b>To:</b>&nbsp;{{r.destinationAddress}}</ion-item>
+      <ion-item><b>Fare:</b>&nbsp;{{r.fare | currency}}</ion-item>
+    </ion-card>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar class="toolbar-header">
+    <ion-title class="h3 text-center" style="color: white; font-weight: 700;"></ion-title>
+  </ion-toolbar>
+</ion-footer>

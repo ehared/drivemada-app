@@ -34,6 +34,18 @@ const routes: Routes = [
 {
   path: 'addVehicle',
   loadChildren: 'src/app/Components/vehicle/vehicle.add.module#VehicleAddComponentModule'
+},
+{
+  path: 'requests',
+  loadChildren: 'src/app/Components/request/request.module#RequestComponentModule'
+},
+{
+  path: 'drive',
+  loadChildren: 'src/app/Components/drive/drive.module#DriveComponentModule'
+},
+{
+  path: 'trips',
+  loadChildren: 'src/app/Components/trip/trip.module#TripComponentModule'
 }
 ];
 

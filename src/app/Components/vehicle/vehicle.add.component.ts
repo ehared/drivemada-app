@@ -10,6 +10,7 @@ import { VehicleComponent } from './vehicle.component';
 import { VehicleService } from 'src/app/Services/vehicle.service';
 import { map, share } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { CURRENT_USER_KEY } from 'src/app/Models/cacheKeys';
 
 @Component({
     selector: 'app-vehicle-add',
@@ -24,11 +25,10 @@ export class VehicleAddComponent implements OnInit {
     isEditMode: boolean = false;
     sizes: string[] = ['Drive X', 'Drive XL'];
 
-    constructor(private router: Router, private utilService: UtilService, private storage: StorageService, private vService: VehicleService,
+    constructor(private router: Router, private utilService: UtilService, private storageService: StorageService, private vService: VehicleService,
         private activatedRoute: ActivatedRoute) { }
     ngOnInit() {
         this.activatedRoute.paramMap.pipe(map(() => window.history.state)).subscribe((result: Vehicle) => {
-            //debugger;
             if (result.id) {
                 this.vehicle = result;
                 this.isEditMode = true;
@@ -38,11 +38,10 @@ export class VehicleAddComponent implements OnInit {
             }            
         })
         
-        this.storage.get("user").then((item) => {
+        this.storageService.getValue(CURRENT_USER_KEY).then((item) => {
             if(item){
-              this.user = JSON.parse(item.value);
+              this.user = item;
               this.userFound = true;
-             // this.vehicle.userId = this.user.id;
             }
           })
     }
@@ -51,7 +50,6 @@ export class VehicleAddComponent implements OnInit {
     }
     addVehicle(form: NgForm) {
         if (this.userFound){
-            //                                                                                                                                                                                                                                                                                              debugger;
             if (this.isEditMode) {
                 this.vService.update(this.vehicle).subscribe((response: any) => {
                     this.utilService.presentToast("Vehicle was edited successfully.");
