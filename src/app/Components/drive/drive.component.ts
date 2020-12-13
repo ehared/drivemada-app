@@ -24,7 +24,6 @@ export class DriveComponent implements OnInit, OnDestroy {
   vehicle: Vehicle = new Vehicle;
   user: User = new User;
   infoWindow: any = [];
-  markers: Marker[] = [];
   latitude: any;
   longitude: any;
   directionsService = new google.maps.DirectionsService;
