@@ -1,12 +1,16 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-title class="h3 text-center" text-center>Add Vehicle</ion-title>
+    <ion-toolbar class="toolbar-header">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+        <ion-title *ngIf="!isEditMode" class="h3 text-center" style="color: white; font-weight: 700;" >Add Vehicle</ion-title>
+        <ion-title *ngIf="isEditMode" class="h3 text-center" style="color: white; font-weight: 700;">Edit Vehicle</ion-title>
         <ion-icon (click)="goBackVehicles()" name="arrow-back-outline" slot="start" style="zoom:2.0;"></ion-icon>
     </ion-toolbar>
 </ion-header>
 <ion-content>
     <div class="container min-vh-100 d-flex align-items-center">
-        <div class="col py-5">
+        <div class="col py-5" >
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6">
                     <div>
@@ -69,10 +73,24 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <label class="form-control-label">Size</label>
+                                <div class="input-group input-group-merge">
+                                    <ion-select class="ion-select" [(ngModel)]="vehicle.size" name="size" #size="ngModel" required placeholder="Select size">
+                                        <ion-select-option class="ion-select" *ngFor="let s of sizes" value="{{s}}">{{s}} </ion-select-option>
+                                     </ion-select>
+                                </div>
+                                <div class="alert alert-danger" *ngIf="size.touched && !size.valid">
+                                    <div *ngIf="size.errors.required">Size is required</div>
+                                </div>
+                            </div>
+
                             <div class="mt-4">
                                 <button type="button" class="btn btn-block btn-primary"
-                                    [disabled]="!vehicleForm.form.valid" (click)="addVehicle(vehicleForm)">Add
-                                    Vehicle</button></div>
+                                    [disabled]="!vehicleForm.form.valid" (click)="addVehicle(vehicleForm)">
+                                    <span *ngIf="!isEditMode">Add Vehicle</span>
+                                    <span *ngIf="isEditMode">Update Vehicle</span>
+                                </button></div>
                         </form>
 
                     </div>

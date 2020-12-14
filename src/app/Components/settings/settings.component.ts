@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router'
 import {ToastController} from "@ionic/angular"
+import { UserService } from 'src/app/Services/user.service';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -8,7 +9,7 @@ import {ToastController} from "@ionic/angular"
 })
 export class SettingsComponent implements OnInit {
 
-  constructor(public router: Router, public tstCntlr: ToastController ) { }
+  constructor(public router: Router, public tstCntlr: ToastController, public userService: UserService ) { }
 
   ngOnInit() {}
 
@@ -16,7 +17,7 @@ export class SettingsComponent implements OnInit {
     this.router.navigateByUrl('editAcct');
   }
   logout(){
-    this.router.navigateByUrl('welcome');
+    this.userService.logout();
   }
 
 }

@@ -1,13 +1,12 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, AfterContentInit, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/Models/user';
-import {Storage} from '@ionic/storage'
 import { Item, StorageService } from 'src/app/Services/storage.service';
 import { VehicleService } from 'src/app/Services/vehicle.service';
-import { share } from 'rxjs/operators';
 import { Vehicle } from 'src/app/Models/vehicle';
+import { MenuController } from '@ionic/angular';
+import { CURRENT_USER_KEY } from 'src/app/Models/cacheKeys';
 
-declare var google: any;
 @Component({
   selector: 'app-vehicle',
   templateUrl: './vehicle.component.html',
@@ -16,42 +15,58 @@ declare var google: any;
 export class VehicleComponent implements OnInit {
 
   map;
-  @ViewChild('mapElement', {static: true}) mapElement : ElementRef;
+  @ViewChild('mapElement', { static: true }) mapElement: ElementRef;
   user: User = new User();
   item: Item = <Item>{};
-  vehicle: Vehicle = new Vehicle();
+  vehicles: Vehicle[] = [];
+  selectedVehicle: Vehicle;
 
-  constructor(private storage: StorageService, private router: Router, private vehService: VehicleService) { 
-     
-  }
-
-  ngOnInit() {
-    
-    this.storage.get("user").then((item) => {
-      if(item){
-        this.user = JSON.parse(item.value);
-        this.vehService.get(this.user.id).pipe(share()).subscribe((response: any) => { 
-          if(response){
-            this.vehicle = response;
-          }
-        });
-      }
-    })
-    this.setMap();
-    
-   
-  }
- setMap(): void {
-    this.map = new google.maps.Map(
-      this.mapElement.nativeElement,
-      {
-        center:{lat: 45.355178, lng: -75.760774 },
-        zoom: 16
+  constructor(private storage: StorageService, private router: Router, private vehService: VehicleService, private activatedRoute: ActivatedRoute, private menuController: MenuController) {
+    this.activatedRoute.params.subscribe(() => {
+      this.storage.getValue(CURRENT_USER_KEY).then((item: User) => {
+        if (item) {
+          this.user = item;
+          this.vehService.get(this.user.id).subscribe((response: Vehicle[]) => {
+            if (response) {
+              this.vehicles = response;
+            }
+          });
+        }
       });
-    
-  }
-  addVehicle(){
-    this.router.navigateByUrl('addVehicle');
+    });
+
+    this.menuController.enable(true);
   }
 
+  ngOnInit() { }
+
+  onSelect(vehicle: Vehicle) {
+    
+    console.log("Selected: " + vehicle.id);
+
+    if(vehicle != null){
+      this.router.navigateByUrl('requests', { state: vehicle });
+    }
+
+  }
+
+  onDelete(vehicle: Vehicle) {
+    console.log("Deleting vehicle with id= " + vehicle.id);
+
+    this.vehService.delete(vehicle.id).subscribe(() => {
+      this.deleteVehicleFromList(vehicle.id);
+    });
+
+
+  }
+  onEdit(vehicle: Vehicle) {
+
+    this.router.navigateByUrl('addVehicle', { state: vehicle });
+
+  }
+
+  deleteVehicleFromList(id: number) {
+    const indexToRemove = this.vehicles.map(item => item.id).indexOf(id);
+    this.vehicles.splice(indexToRemove, 1);
+  }
 }

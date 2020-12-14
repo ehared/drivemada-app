@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar class="toolbar-header">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="h3 text-center" style="color: white; font-weight: 700;">Requests</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content">
+  
+
+  <ion-list-header lines="full" *ngIf="requests.length != 0">
+    <ion-label>Select Request:</ion-label>
+  </ion-list-header>
+
+  <ion-list-header lines="full" *ngIf="requests.length == 0">
+    <ion-label>No requests at this time</ion-label>
+  </ion-list-header>
+
+  <ion-list>
+    <ion-card *ngFor="let r of requests" (click) ="onSelect(r)">
+      
+      <ion-item><b>From:</b>&nbsp;{{r.sourceAddress}}</ion-item> 
+      <ion-item><b>To:</b>&nbsp;{{r.destinationAddress}}</ion-item>
+      <ion-item><b>Fare:</b>&nbsp;{{r.fare | currency}}</ion-item>
+    </ion-card>
+  </ion-list>
+
+</ion-content>
+<ion-footer class="toolbar-header">
+ <ion-item class="toolbar-header">
+  <ion-icon name="car-sport-outline" slot=start></ion-icon>
+  <ion-label class="ion-text-start" style="color: white; font-weight: 500;">{{vehicle.make}} {{vehicle.model}}</ion-label>
+  <ion-label class="ion-text-end" style="color: white; font-weight: 500;">{{vehicle.licensePlate | uppercase }}</ion-label>
+ </ion-item>
+</ion-footer>

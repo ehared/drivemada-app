@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { Vehicle } from '../Models/vehicle';
 import { identifierModuleUrl } from '@angular/compiler';
+import { Observable } from 'rxjs';
 
 
 
@@ -12,22 +13,23 @@ import { identifierModuleUrl } from '@angular/compiler';
 export class VehicleService {
 
     url: string = "https://localhost:44397/api/vehicle"
-  
+   
+
     constructor(private http: HttpClient) { }
     
-   create(vehicle: Vehicle) {
-        return this.http.post(this.url, vehicle);
+   create(id : number, vehicle: Vehicle) {
+        return this.http.post(this.url + '/AddVehicleByUserId?id=' + id, vehicle);
     }
 
     get(id: number) {
-        return this.http.get<Vehicle>(this.url + '/GetVehicleByUserId?id=' + id);
+        return this.http.get<Vehicle[]>(this.url + '/GetVehicleByUserId?id=' + id);
 
     }
     update(vehicle: Vehicle) {
-        return this.http.put(this.url + vehicle.id, vehicle);
+        return this.http.put(this.url + '/UpdateVehicleByUserId', vehicle);
     }
 
     delete(id: number) {
-        return this.http.delete(this.url + '/DeleteVehicleByUserId?id=' + id);
+        return this.http.delete(this.url + '/DeleteVehicleById?id=' + id);
     }
 }

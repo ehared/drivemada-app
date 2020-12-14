@@ -13,15 +13,15 @@ const STORAGE_KEY = "my-storage";
 })
 export class StorageService {
 
-    constructor(private storage: Storage) {}
+    constructor(private storage: Storage) { }
 
     /**
      * This method adds an item to the local storage
      * @param item - item to be added to local storage
      */
-    add(item: Item): Promise<any>{
+    add(item: Item): Promise<any> {
         return this.storage.get(STORAGE_KEY).then((items: Item[]) => {
-            if(items){
+            if (items) {
                 items.push(item);
                 return this.storage.set(STORAGE_KEY, items);
             } else {
@@ -30,17 +30,17 @@ export class StorageService {
         })
     }
 
-    get(key: string){
-        return this.storage.get(STORAGE_KEY).then( (items: Item[]) => {
-           if(!items || items.length === 0){ // no items
+    get(key: string) {
+        return this.storage.get(STORAGE_KEY).then((items: Item[]) => {
+            if (!items || items.length === 0) { // no items
                 return null;
-           } else{
-                for(let i of items){
-                    if(i.key === key){
+            } else {
+                for (let i of items) {
+                    if (i.key === key) {
                         return i;
                     }
-                } 
-           }
+                }
+            }
         })
     }
 
@@ -49,17 +49,17 @@ export class StorageService {
     }
 
     update(item: Item): Promise<any> {
-        return this.storage.get(STORAGE_KEY).then((items: Item[])=> {
-            if(!items || items.length === 0){
+        return this.storage.get(STORAGE_KEY).then((items: Item[]) => {
+            if (!items || items.length === 0) {
                 return null;
             }
-            else{
+            else {
                 let newItems: Item[] = [];
 
-                for(let i of items){
-                    if(i.key === item.key){
+                for (let i of items) {
+                    if (i.key === item.key) {
                         newItems.push(item); // add new updated items
-                    } else{
+                    } else {
                         newItems.push(i); // add other items back to new array
                     }
                 }
@@ -67,22 +67,34 @@ export class StorageService {
             }
         })
     }
-    delete(item: Item): Promise<any>{
+    delete(item: Item): Promise<any> {
         return this.storage.get(STORAGE_KEY).then((items: Item[]) => {
-            if(!items || items.length === 0){
+            if (!items || items.length === 0) {
                 return null;
             } else {
 
                 let newItems: Item[] = [];
 
-                for(let i of items){
-                    if(i.key !== item.key){
+                for (let i of items) {
+                    if (i.key !== item.key) {
                         newItems.push(i);
                     }
                 }
-                return this.storage.set(STORAGE_KEY, newItems); 
+                return this.storage.set(STORAGE_KEY, newItems);
             }
         })
 
+    }
+
+    async deleteKey(key: string): Promise<void> {
+        return this.storage.remove(key);
+    }
+
+    setKey(key: string, value: any): Promise<any> {
+        return this.storage.set(key, value);
+    }
+
+    getValue(key: string): Promise<any> {
+        return this.storage.get(key);
     }
 }

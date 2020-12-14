@@ -8,6 +8,8 @@ import { UtilService } from 'src/app/Services/util.service';
 import { Item, StorageService } from 'src/app/Services/storage.service';
 import { Storage } from '@ionic/storage'
 import { VehicleService } from 'src/app/Services/vehicle.service';
+import { MenuController } from '@ionic/angular';
+import { CURRENT_USER_KEY } from 'src/app/Models/cacheKeys';
 
 
 @Component({
@@ -28,7 +30,9 @@ export class LoginComponent {
    * @param userService - service to make api calls regarding a user 
    * @param utilService - service to create alerts, toasts or print messages to the console
    */
-  constructor(public router: Router, private userService: UserService, private utilService: UtilService, private storageServ: StorageService, private vehService: VehicleService) { }
+  constructor(public router: Router, private userService: UserService, private utilService: UtilService, private storageService: StorageService, private vehService: VehicleService, public menuController: MenuController) { 
+    this.menuController.enable(false);
+  }
 
   /**
    * Shows or hides the password entered into the password field
@@ -57,21 +61,27 @@ export class LoginComponent {
       this.item.key = "user";
       this.item.value = JSON.stringify(response.data['user']);
       this.user = response.data["user"];
-      this.storageServ.add(this.item);
-      this.userService.loggedIn(token);
+      this.storageService.setKey(CURRENT_USER_KEY, this.user); // add user to the local storage
+      this.userService.loggedIn(token); // set the user to logged in
 
      this.checkDriver();
     }, err => {
       /* log in was unsuccesful */
-      this.utilService.presentToast("Unsuccessful login. Please check your email or password");
+      if(err.status == 404){
+        this.utilService.presentToast("Unsuccessful login. Please check your email or password");
+      } else if (err.status === 500 || err.status === 503){
+        this.utilService.presentToast("Server error occured.");
+      } else{
+        this.utilService.presentToast("Unable to login.");
+      }
+      
     })
   }
   checkDriver() {
-    this.vehService.get(this.user.id).pipe(share()).subscribe((response: any) => {
+    this.vehService.get(this.user.id).subscribe((response: any) => {
    
       if(response){ // user already registered a vehicle
-        console.log(response);
-        this.router.navigateByUrl('vehicle');
+          this.router.navigateByUrl('vehicle');
       }
       else {
         this.router.navigateByUrl('addVehicle');

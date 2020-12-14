@@ -1,32 +1,49 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title class="h3 text-center" text-center>Welcome {{user.firstName}}</ion-title>
+  <ion-toolbar class="toolbar-header">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="h3 text-center" style="color: white; font-weight: 700;">Welcome {{user.firstName}}</ion-title>
   </ion-toolbar>
 
-  <ion-toolbar color="primary">
-    <ion-segment value="all">
-      <ion-segment-button value="all">
-        Online
-      </ion-segment-button>
-      <ion-segment-button value="favorites">
-        Offline
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
+
 
 </ion-header>
-<ion-content>
-  <div #mapElement class="map"></div>
+<ion-content class="content">
+  <!--<div #mapElement class="map"></div> -->
+
+
+  <ion-list-header lines="full" *ngIf="vehicles.length != 0">
+    <ion-label>Select Vehicle:</ion-label>
+  </ion-list-header>
+
+  <ion-list-header lines="full" *ngIf="vehicles.length == 0">
+    <ion-label>You have no vehicles, please add a vehicle to continue</ion-label>
+  </ion-list-header>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let v of vehicles" [class.selected]="v === selectedVehicle">
+      <ion-item lines="full" class="ion-item">
+        <ion-label class="ion-text-center"(click)="onSelect(v)" style="color: black; font-weight: 500;">{{v.make}} {{v.model}}</ion-label>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="onDelete(v)">
+          <ion-icon name="trash-outline"></ion-icon> Delete
+        </ion-item-option>
+      </ion-item-options>
+
+      <ion-item-options side="start">
+        <ion-item-option class="ion-item-edit" (click)="onEdit(v)">
+         Edit
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
+  </ion-list>
 
 </ion-content>
 <ion-footer>
-  <ion-toolbar>
-
-    <ion-icon name="car-sport-outline" slot="start" style="zoom:2.0;"></ion-icon>
-    &nbsp;{{vehicle.make}}&nbsp;{{vehicle.model}}&nbsp;&nbsp;
-    {{vehicle.licensePlate}}
-    
-    <ion-icon name="pencil-outline" slot="end" style="zoom: 1.0;"></ion-icon>
-
-  </ion-toolbar>
+  
+    <ion-button class="addButton" expand="full" fill="solid" style="font-weight: 700;" type="button"(click)="router.navigateByUrl('addVehicle')">Add Vehicle</ion-button>
 </ion-footer>
