@@ -12,8 +12,5 @@ export class Request {
     requestDate: any; // should be date ISO string
     completionDate?: any;
 
-    constructor(){
-        
-
-    }
+    constructor(){}
 }

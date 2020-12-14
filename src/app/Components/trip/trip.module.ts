@@ -4,7 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {IonicModule} from '@ionic/angular';
 import {RouterModule} from '@angular/router';
 import { TripComponent  } from './trip.component';
-import { RequestService } from 'android/app/src/main/assets/public/app/Services/requests.service';
+import { RequestService } from 'src/app/Services/requests.service';
 
 @NgModule({
     imports: [

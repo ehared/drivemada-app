@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RequestService } from 'android/app/src/main/assets/public/app/Services/requests.service';
+import { RequestService } from 'src/app/Services/requests.service';
 import { CURRENT_USER_KEY } from 'src/app/Models/cacheKeys';
 import { User } from 'src/app/Models/user';
 import { StorageService } from 'src/app/Services/storage.service';

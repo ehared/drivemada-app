@@ -1,4 +1,4 @@
-import { from, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Request} from 'src/app/Models/request'
@@ -13,11 +13,10 @@ export class RequestService {
 
     getRequest(): Observable<Request[]> {
         return this.http.get<Request[]>(this.url + '/GetRequest');
-
     }
 
-    getTrips(){
-        return this.http.get<Request[]>(this.url + '/GetDriverRequests');
+    getTrips(id: number): Observable<Request[]>{
+        return this.http.get<Request[]>(this.url + '/GetDriverRequests?id=' +  id);
     }
 
     update(request: Request) {
