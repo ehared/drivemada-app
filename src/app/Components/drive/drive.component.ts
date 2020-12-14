@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Capacitor, Plugins, GeolocationPosition } from '@capacitor/core'
-import { Vehicle } from 'android/app/build/intermediates/merged_assets/debug/out/public/app/Models/vehicle';
+import { Vehicle } from 'src/app/Models/vehicle';
 import { map } from 'rxjs/operators';
 import { CURRENT_REQUEST_KEY, CURRENT_USER_KEY, VEHCILE_KEY } from 'src/app/Models/cacheKeys';
 import { Request } from 'src/app/Models/request';
@@ -62,11 +61,9 @@ export class DriveComponent implements OnInit, OnDestroy {
 
       this.setMap();
       this.currentPositionLatLng = new google.maps.LatLng(this.latitude, this.longitude);
-      var destinationLatLng = new google.maps.LatLng(this.request.latitude, this.request.longitude);
-      
+           
       this.geocodeAddress();
-      // this.setDirectionsRoute(source, destination);
-
+      
     }).catch((error) => {
       console.log(error);
       this.setMap();

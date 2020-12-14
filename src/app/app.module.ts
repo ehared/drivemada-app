@@ -18,6 +18,7 @@ import { IonicStorageModule } from '@ionic/storage'
 import { StorageService } from './Services/storage.service';
 import { VehicleService } from './Services/vehicle.service';
 import {RequestService} from './Services/requests.service'
+import { Geolocation } from '@capacitor/core';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,7 +40,7 @@ import {RequestService} from './Services/requests.service'
     StorageService,
     VehicleService,
     RequestService,
-    StatusBar,
+    StatusBar,   
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

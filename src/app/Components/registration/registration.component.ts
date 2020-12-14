@@ -1,11 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { NgModule } from '@angular/core'
 import { User } from 'src/app/Models/user';
 import { UserService } from 'src/app/Services/user.service';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { share } from 'rxjs/operators';
 import { UtilService } from 'src/app/Services/util.service';
 
 @Component({
@@ -50,12 +46,12 @@ export class RegistrationComponent {
    * Creates a user account
    * @param form 
    */
-  signUp(form: any) {
+  signUp() {
 
     /* convert user model to json to send to the server */
 
     let jsonString = JSON.stringify(this.user);
-    this.userService.create(jsonString).subscribe((response: any) => {
+    this.userService.create(jsonString).subscribe(() => {
       /* user was successfully added to caremada database, navigate to login and presenet alert  */
       
       console.log(jsonString);
