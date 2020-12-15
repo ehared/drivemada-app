@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 import { User } from 'src/app/Models/user';
 import { UserService } from 'src/app/Services/user.service';
 import { UtilService } from 'src/app/Services/util.service';
@@ -26,7 +27,9 @@ export class RegistrationComponent {
    * @param userService - service used to make user specific api calls
    * @param utilService - service used to create toasts, alerts, and print messages onto console
    */
-  constructor(public router: Router, private userService: UserService, private utilService: UtilService) { }
+  constructor(public router: Router, private userService: UserService, private utilService: UtilService, private menuController: MenuController) { 
+    this.menuController.enable(false);
+  }
 
   /**
    * Checks to see the password entered in both password and confirm password field match

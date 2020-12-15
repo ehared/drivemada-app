@@ -63,7 +63,7 @@ export class LoginComponent {
       this.user = response.data["user"];
       this.storageService.setKey(CURRENT_USER_KEY, this.user); // add user to the local storage
       this.userService.loggedIn(token); // set the user to logged in
-
+      
      this.checkDriver();
     }, err => {
       /* log in was unsuccesful */
