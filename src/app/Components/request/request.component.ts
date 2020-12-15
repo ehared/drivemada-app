@@ -7,6 +7,7 @@ import { Request } from 'src/app/Models/request'
 import { AlertController } from '@ionic/angular';
 import { StorageService } from 'src/app/Services/storage.service';
 import { VEHCILE_KEY } from 'src/app/Models/cacheKeys';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-request',
@@ -18,6 +19,8 @@ export class RequestComponent implements OnDestroy {
   requests: Request[] = [];
   vehicle: Vehicle = new Vehicle;
   fetchRequests: NodeJS.Timeout;
+  subscription: Subscription;
+
   constructor(public requestService: RequestService, public activatedRoute: ActivatedRoute, public alertController: AlertController,
     public storageService: StorageService, public router: Router) {
     this.activatedRoute.paramMap.pipe(map(() => window.history.state)).subscribe((result: Vehicle) => {
@@ -37,12 +40,18 @@ export class RequestComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    clearInterval(this.fetchRequests)
+    clearInterval(this.fetchRequests);
+    //this.subscription.unsubscribe();
   }
 
   getRequests() {
-    this.requestService.getRequest().subscribe((response: Request[]) => {
-      this.requests = response;
+   this.requestService.getRequest().subscribe((response: Request[]) => {
+      
+      if(response.length != 0){
+        this.requests = response;
+      } else {
+        this.requests = [];
+      }
     });
   }
 
