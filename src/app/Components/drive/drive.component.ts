@@ -34,14 +34,6 @@ export class DriveComponent implements OnInit, OnDestroy {
   constructor(public activatedRoute: ActivatedRoute, public storageService: StorageService, public geolocation: Geolocation, public requestService: RequestService, private router: Router) {
     this.activatedRoute.paramMap.pipe(map(() => window.history.state)).subscribe((result: Request) => {
 
-      if (result.id) {
-        this.request = result;
-        this.storageService.setKey(CURRENT_REQUEST_KEY, result);
-      } else {
-        this.storageService.getValue(CURRENT_REQUEST_KEY).then((result: Request) => {
-          this.request = result;
-        })
-      }
       this.storageService.getValue(CURRENT_USER_KEY).then((result: User) => {
         this.user = result;
       });
