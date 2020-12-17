@@ -28,6 +28,10 @@ const routes: Routes = [
   loadChildren: 'src/app/Components/edit-acct/edit-acct.module#EditAcctComponentModule'
 },
 {
+  path: 'editPassword',
+  loadChildren: 'src/app/Components/edit-password/edit-password.module#EditPasswordComponentModule'
+},
+{
   path: 'vehicle',
   loadChildren: 'src/app/Components/vehicle/vehicle.module#VehicleComponentModule'
 },

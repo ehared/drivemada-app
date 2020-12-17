@@ -1,63 +1,86 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-
-import { Injectable } from '@angular/core';
-import { Http, Headers, Response, RequestOptions } from '@angular/http';
-import { HttpClientModule, HttpClientXsrfModule, HttpClient } from  '@angular/common/http';
-import { map, catchError } from 'rxjs/operators';
-// import 'rxjs/add/operator/map';
+import { User } from 'src/app/Models/user';
+import { UserService } from 'src/app/Services/user.service';
+import { Item, StorageService } from 'src/app/Services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-acct',
   templateUrl: './edit-acct.component.html',
-  styleUrls: ['./edit-acct.component.scss'],
+  styleUrls: ['./edit-acct.component.scss', '../../../assets/scss/purpose-dark.scss'],
 })
 export class EditAcctComponent implements OnInit {
 
-  constructor(private _location: Location, private http: HttpClient) { }
-  email: string;
-  password : string;
-  phoneNumber: string;
+  id: any;
+  firstName: any;
+  lastName: any;
+  area: any;
+  city: any;
+  country: any;
+  postalCode: any;
+  about: any;
+  phone: any = '';
+  addressLine1: any = '';
+  addressLine2: any = '';
+  update_data: any;
+  user: User = new User;
+  token: string;
+  item: Item = <Item>{};
 
-  ngOnInit() {
-    let data1 = this.getUsers()
-    .subscribe((data:any) => {
-      // console.log(data);
-      this.email = data.email;
-      this.password = data.password;
-      this.phoneNumber = data.phoneNumber;
-      // this.users = data.data;
+  constructor(private router: Router, public storageService: StorageService, public userService: UserService) {
+
+
+    this.userService.getSelf().subscribe((response: any) => {
+      if (response) {
+        this.user.id = response.data['id'];
+        this.user.firstName = response.data['firstName'];
+        this.user.lastName = response.data['lastName'];
+        this.user.email = response.data['email'];
+        this.user.phoneNumber = response.data['phone'];
+        this.user.addressLine1 = response.data['location']['addressLine1'];
+        this.user.addressLine2 = response.data['location']['addressLine2'];
+        this.user.city = response.data['location']['city'];
+        this.user.postalCode = response.data['location']['postalCode'];
+        this.user.area = response.data['location']['area'];
+
+        //console.log(this.user);
+      }
+      
+    }, () => {
+
     });
+
+    /* grab current user from storageService , var result */
   }
 
-  getUsers() {
-    return this.http.get('http://localhost:8000/editAcct')
-        .pipe(
-           map((data: any) => {
-             return data;
-           })
-        )
-  }
-  saveUsers() {
-    return this.http.get('http://localhost:8000/showAcct'+'/'+this.email+'/'+this.password+'/'+this.phoneNumber)
-        .pipe(
-           map((data: any) => {
-             return data;
-           })
-        )
-  }
+
+  ngOnInit() { }
 
   back() {
-    this._location.back();
+    this.router.navigateByUrl('settings');
+  }
+
+  goBackToSettings() {
+    this.router.navigateByUrl('settings');
   }
 
   editAccount() {
-    let data1 = this.saveUsers()
-    .subscribe((data:any) => {
-      // console.log(data);
-    
-      // this.users = data.data;
-    });
-    this._location.back();
+    this.router.navigateByUrl('settings');
   }
+
+  UpdateForm() {
+
+
+    this.userService.updateUser(this.user).subscribe((response: any) => {
+      console.log("response: " + response);
+    })
+
+    
+
+    
+
+    this.back();
+
+  }
+
 }

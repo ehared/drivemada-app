@@ -9,7 +9,7 @@ import { Item, StorageService } from 'src/app/Services/storage.service';
 import { Storage } from '@ionic/storage'
 import { VehicleService } from 'src/app/Services/vehicle.service';
 import { MenuController } from '@ionic/angular';
-import { CURRENT_USER_KEY } from 'src/app/Models/cacheKeys';
+import { CURRENT_USER_KEY, TOKEN_KEY } from 'src/app/Models/cacheKeys';
 
 
 @Component({

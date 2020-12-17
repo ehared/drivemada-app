@@ -16,7 +16,11 @@ export class SettingsComponent implements OnInit {
   goEditAcct() {
     this.router.navigateByUrl('editAcct');
   }
-  logout() {
+
+  goEditPassword(){
+    this.router.navigateByUrl('editPassword');
+  }
+  logout(){
     this.userService.logout();
   }
   redirectHelp() {

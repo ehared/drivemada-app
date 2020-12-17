@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {ToastrModule} from 'ngx-toastr'
 import {UserService} from 'src/app/Services/user.service'
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UtilService } from './Services/util.service';
 import { IonicStorageModule } from '@ionic/storage'
@@ -19,7 +19,8 @@ import { StorageService } from './Services/storage.service';
 import { VehicleService } from './Services/vehicle.service';
 import {RequestService} from './Services/requests.service'
 import { Geolocation } from '@capacitor/core';
-import { UserInterceptor } from './Services/user.interceptor';
+import {HTTP_INTERCEPTORS} from '@angular/common/http'
+import {UserInterceptor} from 'src/app/Services/user.interceptor'
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,6 +42,7 @@ import { UserInterceptor } from './Services/user.interceptor';
     StorageService,
     VehicleService,
     RequestService,
+    { provide: HTTP_INTERCEPTORS, useClass: UserInterceptor, multi: true},
     StatusBar,   
     SplashScreen,
     { provide: HTTP_INTERCEPTORS, useClass: UserInterceptor, multi: true},

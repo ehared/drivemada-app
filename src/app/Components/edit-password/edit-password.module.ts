@@ -1,12 +1,11 @@
-import {EditAcctComponent} from './edit-acct.component';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {IonicModule} from '@ionic/angular';
 import {RouterModule} from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-
-
+import {EditPasswordComponent} from './edit-password.component';
+import { HttpModule, Response } from '@angular/http';
+import { HttpClientModule, HttpClientXsrfModule, HttpClient } from  '@angular/common/http';
 
 @NgModule({
     imports: [
@@ -17,11 +16,11 @@ import { HttpClientModule } from '@angular/common/http';
         RouterModule.forChild([
             {
                 path: '',
-                component: EditAcctComponent
+                component: EditPasswordComponent
             }
         ])
     ],
-    declarations: [EditAcctComponent]
+    declarations: [EditPasswordComponent]
 })
-export class EditAcctComponentModule {
+export class EditPasswordComponentModule {
 }
