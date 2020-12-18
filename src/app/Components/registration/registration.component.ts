@@ -1,3 +1,7 @@
+/**
+ * Filename: registration.component.ts
+ * Purpose: Generates registration component and presents a form for a user to create an account.
+ */
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
@@ -22,10 +26,11 @@ export class RegistrationComponent {
     }
 
   /**
-   * 
+   * Constructor
    * @param router - router used to navigate through url pages
    * @param userService - service used to make user specific api calls
    * @param utilService - service used to create toasts, alerts, and print messages onto console
+   * @param menuController - enables and disables side menu
    */
   constructor(public router: Router, private userService: UserService, private utilService: UtilService, private menuController: MenuController) { 
     this.menuController.enable(false);

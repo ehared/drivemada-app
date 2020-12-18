@@ -1,3 +1,9 @@
+/**
+ * Filename: request.ts
+ * Purpose: Request class to generate a request object
+ * Author: Eltire Hared
+ * 
+ */
 export class Request {
 
     id?: Number;
