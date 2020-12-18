@@ -46,6 +46,11 @@ const routes: Routes = [
 {
   path: 'trips',
   loadChildren: 'src/app/Components/trip/trip.module#TripComponentModule'
+},
+{
+  path: 'editPassword',
+  loadChildren: 'src/app/Components/edit-password/edit-password.module#EditPasswordComponentModule'
+
 }
 ];
 

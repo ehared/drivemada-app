@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
       title: 'Settings',
       url: '/settings',
       icon: 'settings'
-    }
+    },
   ];
 
   constructor(

@@ -1,18 +1,135 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class = "toolbar-header">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Edit Account</ion-title>
-    <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+    <ion-title class="h3 text-center" style="color: white; font-weight: 700;">Edit Account</ion-title>
+ 
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-  <ion-card>
-    <ion-item>
-      <ion-icon name="pin" slot="start"></ion-icon>
-      <img src="">
-    </ion-item>
-  </ion-card>
+  <div class="container min-vh-100  align-items-center">
+    <div class="col py-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+          <div>
+            <form #editForm="ngForm" onsubmit="editAccount(editForm)">
+
+              <div class="form-group">
+                <label class="form-control-label">First Name</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="text" class="form-control" id="first_name" [(ngModel)]="user.firstName" disabled
+                    name="first_name" #first_name="ngModel">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-control-label">Last Name</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="text" class="form-control" id="last_name" [(ngModel)]="user.lastName" disabled
+                    name="last_name" #last_name="ngModel">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-control-label">Email address</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="email" class="form-control" id="input-email" placeholder="name@example.com" required
+                    [(ngModel)]="user.email" disabled name="user_mail" #user_mail="ngModel"
+                    pattern="[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$">
+                </div>
+                <div class="alert alert-danger" *ngIf="user_mail.touched && !user_mail.valid">
+                  <div *ngIf="user_mail.errors.required">Email is required.</div>
+                  <div *ngIf="user_mail.errors.pattern">Invalid email format.</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-control-label">Phone Number</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="text" inputmode="tel" pattern="^((?!(0))[0-9]{10})$" required class="form-control"
+                    placeholder="6131234576" [(ngModel)]="user.phoneNumber" name="phone_number" #phone_number="ngModel"
+                    minlength="10" maxlength="10">
+                </div>
+                <div class="alert alert-danger" *ngIf="phone_number.touched && !phone_number.valid">
+                  <div *ngIf="phone_number.errors.required">Phone number is required</div>
+                  <div *ngIf="phone_number.errors.pattern">Phone number must be a length of 10, and can not start with 0
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-control-label">Address Line1</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="text" class="form-control" id="addressline1" required [(ngModel)]="user.addressLine1"
+                    name="addressline1" #addressline1="ngModel">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-control-label">Address Line2</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="text" class="form-control" id="addressline2" required [(ngModel)]="user.addressLine2"
+                    name="addressline2" #addressline2="ngModel">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-control-label">City</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="text" class="form-control" id="city" required [(ngModel)]="user.city" name="city_name"
+                    #city_name="ngModel">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-control-label">Province</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="text" class="form-control" id="area" required [(ngModel)]="user.area" name="area"
+                    #area_name="ngModel">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-control-label">Postal Code</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  </div>
+                  <input type="text" class="form-control" id="postalCode" required [(ngModel)]="user.postalCode"
+                    name="postalCode" #postal_code="ngModel">
+                </div>
+              </div>
+
+              <button type="button" class="btn btn-block btn-primary" (click)="UpdateForm()">Update</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>

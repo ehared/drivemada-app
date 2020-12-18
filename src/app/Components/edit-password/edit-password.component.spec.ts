@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { EditAcctComponent } from './edit-acct.component';
+import { EditPasswordComponent } from './edit-password.component';
 
-describe('EditAcctComponent', () => {
-  let component: EditAcctComponent;
-  let fixture: ComponentFixture<EditAcctComponent>;
+describe('EditPasswordComponent', () => {
+  let component: EditPasswordComponent;
+  let fixture: ComponentFixture<EditPasswordComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [EditAcctComponent],
+      declarations: [ EditPasswordComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(EditAcctComponent);
+    fixture = TestBed.createComponent(EditPasswordComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
