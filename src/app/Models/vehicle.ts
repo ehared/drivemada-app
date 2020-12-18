@@ -1,3 +1,8 @@
+/**
+ * Filename: vehicle.ts
+ * Purpose: Vehicle class to generate a vehicle object 
+ * Author: Eltire Hared 
+ */
 export class Vehicle {
     id?: number;
     make: string;

@@ -1,3 +1,8 @@
+/**
+ * Filename: login.component.ts
+ * Purpose: Renders login component, allows user to login to their account with their account credentials
+ * Author: Eltire Hared
+ */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/Models/user';
@@ -19,18 +24,21 @@ import { CURRENT_USER_KEY } from 'src/app/Models/cacheKeys';
 })
 export class LoginComponent {
 
-  user = new User;
-  show: boolean = false;
+  user = new User; // user logging into the app
+  show: boolean = false; // boolean used for showing and hiding the password entered by the user
   item: Item = <Item>{};
   isDriver: boolean = false;
 
   /**
-   * The constructor for LoginComponent
-   * @param router - the router object used to navigate
-   * @param userService - service to make api calls regarding a user 
-   * @param utilService - service to create alerts, toasts or print messages to the console
+   * Constructor
+   * @param router - router used to navigate through the pages
+   * @param userService  - user service to make http calls to caremada regarding a user
+   * @param utilService  - util service to display toasts, and alerts
+   * @param storageService  - storage service to save current user and their token after successful login
+   * @param vehService  - vehicle service to make http calls regarding a vehicle
+   * @param menuController  - enable and disables side menu
    */
-  constructor(public router: Router, private userService: UserService, private utilService: UtilService, private storageService: StorageService, private vehService: VehicleService, public menuController: MenuController) { 
+  constructor(public router: Router, private userService: UserService, private utilService: UtilService, private storageService: StorageService, private vehService: VehicleService, public menuController: MenuController) {
     this.menuController.enable(false);
   }
 
@@ -63,31 +71,34 @@ export class LoginComponent {
       this.user = response.data["user"];
       this.storageService.setKey(CURRENT_USER_KEY, this.user); // add user to the local storage
       this.userService.loggedIn(token); // set the user to logged in
-      
-     this.checkDriver();
+
+      this.checkDriver();
     }, err => {
       /* log in was unsuccesful */
-      if(err.status == 404){
+      if (err.status == 404) {
         this.utilService.presentToast("Unsuccessful login. Please check your email or password");
-      } else if (err.status === 500 || err.status === 503){
+      } else if (err.status === 500 || err.status === 503) {
         this.utilService.presentToast("Server error occured.");
-      } else{
+      } else {
         this.utilService.presentToast("Unable to login.");
       }
-      
+
     })
   }
+  /**
+   *  Checks to see if the user logging in as vehicles registered to their account, and navigates to the correct page
+   */
   checkDriver() {
     this.vehService.get(this.user.id).subscribe((response: any) => {
-   
-      if(response){ // user already registered a vehicle
-          this.router.navigateByUrl('vehicle');
+
+      if (response) { // user already registered a vehicle
+        this.router.navigateByUrl('vehicle');
       }
       else {
         this.router.navigateByUrl('addVehicle');
       }
-      
-    }, err=> {
+
+    }, err => {
       this.router.navigateByUrl('addVehicle');
     });
   }

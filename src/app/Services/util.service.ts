@@ -1,4 +1,8 @@
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+/**
+ * Filename: util.service.ts
+ * Purpose: Util service to present alert dialogs, toasts, or messages to the console
+ * Author: Eltire Hared
+ */
 import { Injectable } from "@angular/core";
 import { AlertController, ToastController } from '@ionic/angular';
 

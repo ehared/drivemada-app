@@ -1,3 +1,8 @@
+/**
+ * Filename: user.ts
+ * Purpose: User class to generate a user object
+ * Author: Eltire Hared
+ */
 export class User {
     // User table
     id?: number;

@@ -1,3 +1,8 @@
+/**
+ * Filename: trip.component.ts
+ * Purpose: Creates the trip component which lists out a list of completed trips by the user
+ * Author: Eltire Hared
+ */
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from 'src/app/Services/requests.service';
 import { CURRENT_USER_KEY } from 'src/app/Models/cacheKeys';
@@ -14,11 +19,18 @@ import { MenuController } from '@ionic/angular';
 export class TripComponent implements OnInit {
 
   toggle: boolean = false;
-  user: User = new User;
-  requests: Request[] = [];
+  user: User = new User; // user
+  requests: Request[] = []; // list of completed trips
+
+  /**
+   * Constructor
+   * @param storageService - storage service used to grab the current user
+   * @param requestService - request service used to get the list of trips completed by the driver
+   * @param menuController  - enables and disables the side menu
+   */
   constructor(public storageService: StorageService, public requestService: RequestService, public menuController: MenuController) {
 
-
+    /* retrieve the user from local storage */
     this.storageService.getValue(CURRENT_USER_KEY).then((result: User) => {
       if (result) {
         this.user = result;
@@ -29,6 +41,9 @@ export class TripComponent implements OnInit {
 
   ngOnInit() { }
 
+  /**
+   *  Retrieves a list of completed requests
+   */
   getRequests() {
     this.requestService.getTrips(this.user.id).subscribe((response: Request[]) => {
       this.requests = response;
