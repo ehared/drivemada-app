@@ -10,6 +10,8 @@ import { User } from 'src/app/Models/user';
 import { StorageService } from 'src/app/Services/storage.service';
 import { Request } from 'src/app/Models/request'
 import { MenuController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-trip',
@@ -28,15 +30,21 @@ export class TripComponent implements OnInit {
    * @param requestService - request service used to get the list of trips completed by the driver
    * @param menuController  - enables and disables the side menu
    */
-  constructor(public storageService: StorageService, public requestService: RequestService, public menuController: MenuController) {
+  constructor(public activatedRoute: ActivatedRoute, public storageService: StorageService, public requestService: RequestService, public menuController: MenuController) {
 
-    /* retrieve the user from local storage */
-    this.storageService.getValue(CURRENT_USER_KEY).then((result: User) => {
-      if (result) {
-        this.user = result;
-        this.getRequests();
-      }
-    })
+    this.activatedRoute.paramMap.pipe(map(() => window.history.state)).subscribe(() => {
+     
+      /* retrieve the user from local storage */
+      this.storageService.getValue(CURRENT_USER_KEY).then((result: User) => {
+        
+        if (result.id) {
+          this.user = result;
+          this.getRequests();
+        }
+      });
+    });
+
+
   }
 
   ngOnInit() { }
@@ -45,7 +53,9 @@ export class TripComponent implements OnInit {
    *  Retrieves a list of completed requests
    */
   getRequests() {
+    
     this.requestService.getTrips(this.user.id).subscribe((response: Request[]) => {
+    
       this.requests = response;
     });
   }

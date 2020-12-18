@@ -160,7 +160,8 @@ export class DriveComponent implements OnInit, OnDestroy {
    */
   completedTrip() {
     this.request.driverId = this.user.id;
-    this.request.completionDate = new Date().toISOString(); // set completion date
+    this.request.completionDate = new Date().toJSON(); // set completion date
+    
 
     this.requestService.update(this.request).subscribe(() => {
       this.router.navigateByUrl('requests');
