@@ -23,7 +23,8 @@ export class RequestComponent implements OnDestroy {
 
   requests: Request[] = []; // list of requests
   vehicle: Vehicle = new Vehicle; // vehicle selected by the user
-  fetchRequests: NodeJS.Timeout; // timer for refreshing the request list
+ // fetchRequests: NodeJS.Timeout; // timer for refreshing the request list
+  timer: any;
 
   /**
    * Constructor
@@ -47,7 +48,7 @@ export class RequestComponent implements OnDestroy {
       }
 
       this.getRequests(); // get the list of requests
-      this.fetchRequests = setInterval(this.getRequests.bind(this), 10 * 1000); // set timer interval for refreshing the request list
+      this.timer = setInterval(this.getRequests.bind(this), 10 * 1000); // set timer interval for refreshing the request list
     });
   }
 
@@ -55,7 +56,8 @@ export class RequestComponent implements OnDestroy {
    *  Clears the timer, once the component is destroyed
    */
   ngOnDestroy() {
-    clearInterval(this.fetchRequests);
+    debugger;
+    clearInterval(this.timer);
     //this.subscription.unsubscribe();
   }
   /**
@@ -92,8 +94,9 @@ export class RequestComponent implements OnDestroy {
         {
           text: 'Accept',
           handler: () => {
+            clearInterval(this.timer); // clears the timer on the list
             this.router.navigateByUrl('drive', { state: req }); // navigates to drive component
-            clearInterval(this.fetchRequests); // clears the timer on the list
+             
           }
         }
       ]
