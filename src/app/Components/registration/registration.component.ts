@@ -26,7 +26,7 @@ export class RegistrationComponent {
     }
 
   /**
-   * Constructor
+   * Constructor for registration component
    * @param router - router used to navigate through url pages
    * @param userService - service used to make user specific api calls
    * @param utilService - service used to create toasts, alerts, and print messages onto console
@@ -57,8 +57,10 @@ export class RegistrationComponent {
   signUp() {
 
     /* convert user model to json to send to the server */
-
+    console.log(this.user)
     let jsonString = JSON.stringify(this.user);
+    console.log(jsonString)
+    debugger;
     this.userService.create(jsonString).subscribe(() => {
       /* user was successfully added to caremada database, navigate to login and presenet alert  */
       

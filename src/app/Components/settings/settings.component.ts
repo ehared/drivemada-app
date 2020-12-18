@@ -31,6 +31,10 @@ export class SettingsComponent implements OnInit {
     this.router.navigateByUrl('editAcct');
   }
 
+  goEditPassword(){
+    this.router.navigateByUrl('editPassword');
+  }
+
   /**
    *  calls user service to clear storage and log out the user
    */

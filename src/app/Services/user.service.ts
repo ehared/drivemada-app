@@ -95,4 +95,19 @@ export class UserService {
             return this.auth;
         return this.storageService.getValue[TOKEN_KEY];
     }
+    /**
+     *  Updates the users account information
+     * Author: Adi
+     */
+    updateUser(user: any) {
+        return this.http.patch(this.url + '/users/me', user);
+    }
+    /**
+     * Update the user's password
+     * Author: Adi
+     */
+    updateCredentials(user: any) {
+
+        return this.http.patch(this.url + '/users/me/credentials', user)
+    }
 }

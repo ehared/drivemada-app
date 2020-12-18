@@ -56,7 +56,7 @@ export class RequestComponent implements OnDestroy {
    *  Clears the timer, once the component is destroyed
    */
   ngOnDestroy() {
-    debugger;
+    
     clearInterval(this.timer);
     //this.subscription.unsubscribe();
   }
